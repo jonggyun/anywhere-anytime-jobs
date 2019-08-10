@@ -1,0 +1,32 @@
+{
+  "name": "anywhere_anytime_jobs_server",
+  "version": "1.0.0",
+  "description": "Remote and Flexible Company list in South Korea - server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_PATH=src node src",
+    "start:dev": "NODE_PATH=src nodemon --watch src/ src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonggyun/anywhere-anytime-jobs.git"
+  },
+  "author": "JongGyun Park",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonggyun/anywhere-anytime-jobs/issues"
+  },
+  "homepage": "https://github.com/jonggyun/anywhere-anytime-jobs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.2",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-promise": "^4.2.1"
+  }
+}
