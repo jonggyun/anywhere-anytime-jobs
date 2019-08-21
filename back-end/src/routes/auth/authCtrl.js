@@ -85,3 +85,14 @@ exports.logIn = async (req, res) => {
     res.status(400).json({ error: { name, message } });
   }
 };
+
+exports.logOut = async req => {
+  const { username } = req.body;
+  const userData = {
+    Username: username,
+    Pool: userPool,
+  };
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+  cognitoUser.globalSignOut();
+};
