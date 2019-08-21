@@ -51,3 +51,37 @@ exports.signUp = async (req, res) => {
     res.status(400).json({ error: { name, message } });
   }
 };
+
+exports.logIn = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const authenticationData = {
+      Username: username,
+      Password: password,
+    };
+    const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
+      authenticationData,
+    );
+
+    const userData = {
+      Username: username,
+      Pool: userPool,
+    };
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.authenticateUser(authenticationDetails, {
+      onSuccess: result => {
+        const accessToken = result.getAccessToken().getJwtToken();
+        // Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer
+        const idToken = result.idToken.jwtToken;
+        res.status(200).json({ accessToken, idToken });
+      },
+      onFailure: err => {
+        const { name, message } = err;
+        res.status(400).json({ error: { name, message } });
+      },
+    });
+  } catch (e) {
+    const { name, message } = e;
+    res.status(400).json({ error: { name, message } });
+  }
+};
