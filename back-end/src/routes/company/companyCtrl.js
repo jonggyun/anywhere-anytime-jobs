@@ -108,6 +108,26 @@ exports.modifyCompany = async (req, res) => {
   }
 };
 
-exports.removeCompany = async () => {
-  console.log('remove');
+exports.removeCompany = async (req, res) => {
+  try {
+    const { companyId } = req.params;
+    const { company } = req.body;
+
+    await docClient
+      .delete({
+        ...params,
+        Key: {
+          companyId,
+          company,
+        },
+      })
+      .promise();
+    res.status(200).json({
+      message: 'success',
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
 };
