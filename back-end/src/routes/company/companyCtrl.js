@@ -6,24 +6,23 @@ AWS.config.update({
   endpoint: config.AWS.endpoint,
 });
 
+const params = {
+  TableName: config.AWS.TableName.company,
+};
+
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.getAllCompanies = async (req, res) => {
   try {
-    const params = {
-      TableName: config.AWS.TableName.company,
-    };
-
     const data = await docClient.scan(params).promise();
 
     res.status(200).json({
       message: 'success',
       data,
     });
-  } catch (e) {
-    console.log('err', e);
+  } catch (error) {
     res.status(400).json({
-      error: e,
+      error,
     });
   }
 };
@@ -32,8 +31,36 @@ exports.addCompany = async () => {
   console.log('add');
 };
 
-exports.getCompany = async () => {
-  console.log('get');
+exports.getCompany = async (req, res) => {
+  try {
+    const { company } = req.params;
+    console.log('req param', company);
+    const condition = {
+      KeyConditionExpression: '#cp = :company',
+      ExpressionAttributeNames: {
+        '#cp': 'company',
+      },
+      ExpressionAttributeValues: {
+        ':company': company,
+      },
+    };
+
+    const data = await docClient
+      .query({
+        ...params,
+        ...condition,
+      })
+      .promise();
+
+    res.status(200).json({
+      message: 'success',
+      data,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
 };
 
 exports.modifyCompany = async () => {

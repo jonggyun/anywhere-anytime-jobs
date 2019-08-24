@@ -10,9 +10,9 @@ const {
 const router = express.Router();
 
 router.get('/', getAllCompanies);
-router.post('/:companyId', addCompany);
-router.get('/:conpanyId', getCompany);
-router.put('/:conpanyId', modifyCompany);
-router.delete('/:conpanyId', removeCompany);
+router.post('/:company', addCompany);
+router.get('/:company', getCompany);
+router.put('/:company', modifyCompany);
+router.delete('/:company', removeCompany);
 
 module.exports = router;
