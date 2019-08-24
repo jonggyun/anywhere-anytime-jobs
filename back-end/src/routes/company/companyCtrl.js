@@ -56,14 +56,14 @@ exports.addCompany = async (req, res) => {
 
 exports.getCompany = async (req, res) => {
   try {
-    const { company } = req.params;
+    const { companyId } = req.params;
     const condition = {
-      KeyConditionExpression: '#cp = :company',
+      KeyConditionExpression: '#cp = :companyId',
       ExpressionAttributeNames: {
-        '#cp': 'company',
+        '#cp': 'companyId',
       },
       ExpressionAttributeValues: {
-        ':company': company,
+        ':companyId': companyId,
       },
     };
 
@@ -85,8 +85,27 @@ exports.getCompany = async (req, res) => {
   }
 };
 
-exports.modifyCompany = async () => {
-  console.log('modify');
+exports.modifyCompany = async (req, res) => {
+  try {
+    const { companyId } = req.params;
+    const validated = await Joi.validate(req.body, companySchema);
+    await docClient
+      .put({
+        ...params,
+        Item: {
+          ...validated,
+          companyId,
+        },
+      })
+      .promise();
+    res.status(200).json({
+      message: 'success',
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
 };
 
 exports.removeCompany = async () => {

@@ -11,8 +11,8 @@ const router = express.Router();
 
 router.get('/', getAllCompanies);
 router.post('/', addCompany);
-router.get('/:company', getCompany);
-router.put('/:company', modifyCompany);
-router.delete('/:company', removeCompany);
+router.get('/:companyId', getCompany);
+router.put('/:companyId', modifyCompany);
+router.delete('/:companyId', removeCompany);
 
 module.exports = router;
