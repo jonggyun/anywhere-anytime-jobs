@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 router.get('/', getAllCompanies);
-router.post('/:company', addCompany);
+router.post('/', addCompany);
 router.get('/:company', getCompany);
 router.put('/:company', modifyCompany);
 router.delete('/:company', removeCompany);

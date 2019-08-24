@@ -1,5 +1,9 @@
 const AWS = require('aws-sdk');
+const Joi = require('@hapi/joi');
+const uuidv1 = require('uuid/v1');
+
 const config = require('../../constant');
+const { companySchema } = require('../../schemas');
 
 AWS.config.update({
   region: config.AWS.region,
@@ -27,14 +31,32 @@ exports.getAllCompanies = async (req, res) => {
   }
 };
 
-exports.addCompany = async () => {
-  console.log('add');
+exports.addCompany = async (req, res) => {
+  try {
+    const validated = await Joi.validate(req.body, companySchema);
+    await docClient
+      .put({
+        ...params,
+        Item: {
+          companyId: uuidv1(),
+          ...validated,
+        },
+      })
+      .promise();
+    res.status(200).json({
+      message: 'success',
+    });
+  } catch (error) {
+    console.log('error', error);
+    res.status(400).json({
+      error,
+    });
+  }
 };
 
 exports.getCompany = async (req, res) => {
   try {
     const { company } = req.params;
-    console.log('req param', company);
     const condition = {
       KeyConditionExpression: '#cp = :company',
       ExpressionAttributeNames: {
