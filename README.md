@@ -29,3 +29,15 @@ This project's back-end and front-end use some common packages.
 - eslint-airbnb-base, lint-staged, husky
 
   lint-staged and husky prohibit
+
+- AWS Cognito
+
+  To manage user signup, login etc...
+
+- AWS DynamoDB
+
+  To store data by NoSQL
+
+- Joi
+
+  Joi is package what check object validation.
