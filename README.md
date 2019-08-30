@@ -41,3 +41,17 @@ This project's back-end and front-end use some common packages.
 - Joi
 
   Joi is package what check object validation.
+
+## Front-End
+
+### Specifications
+
+- React.js
+
+- Typescript
+
+- redux-saga
+
+- immer.js
+
+- lint-staged, husky
