@@ -18,11 +18,13 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 exports.getAllCompanies = async (req, res) => {
   try {
-    const data = await docClient.scan(params).promise();
+    const { Items: items, Count: count } = await docClient
+      .scan(params)
+      .promise();
 
     res.status(200).json({
       message: 'success',
-      data,
+      data: { items, count },
     });
   } catch (error) {
     res.status(400).json({
@@ -65,9 +67,10 @@ exports.getCompany = async (req, res) => {
       ExpressionAttributeValues: {
         ':companyId': companyId,
       },
+      Limit: 1,
     };
 
-    const data = await docClient
+    const { Items: items, Count: count } = await docClient
       .query({
         ...params,
         ...condition,
@@ -76,7 +79,7 @@ exports.getCompany = async (req, res) => {
 
     res.status(200).json({
       message: 'success',
-      data,
+      data: { items, count },
     });
   } catch (error) {
     res.status(400).json({
