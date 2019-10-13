@@ -38,9 +38,17 @@ This project's back-end and front-end use some common packages.
 
   To store data by NoSQL
 
+- AWS Lambda & S3
+
+  To store image files
+
 - Joi
 
   Joi is package what check object validation.
+
+- Naver Open API
+
+- Google MAP API
 
 ## Front-End
 
