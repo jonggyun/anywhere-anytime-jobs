@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const Joi = require('@hapi/joi');
 const uuidv1 = require('uuid/v1');
+const axios = require('axios');
 
 const config = require('../../constant');
 const { companySchema } = require('../../schemas');
@@ -129,6 +130,34 @@ exports.removeCompany = async (req, res) => {
       .promise();
     res.status(200).json({
       message: 'success',
+    });
+  } catch (error) {
+    res.status(400).json({
+      error,
+    });
+  }
+};
+
+exports.getCompanyNews = async (req, res) => {
+  try {
+    const { companyName } = req.params;
+
+    console.log('encodeURI', encodeURI(companyName));
+
+    const {
+      data: { items },
+    } = await axios.get(
+      `${config.NAVER.API_URL}${encodeURI(companyName)}&display=5`,
+      {
+        headers: {
+          'X-Naver-Client-Id': config.NAVER.CLIENT_ID,
+          'X-Naver-Client-Secret': config.NAVER.CLIENT_SECRET,
+        },
+      },
+    );
+
+    res.status(200).json({
+      data: items,
     });
   } catch (error) {
     res.status(400).json({
