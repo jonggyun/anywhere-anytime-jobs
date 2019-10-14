@@ -6,12 +6,12 @@ const config = require('../../constant');
 const { companySchema } = require('../../schemas');
 
 AWS.config.update({
-  region: config.AWS.region,
-  endpoint: config.AWS.endpoint,
+  region: config.AWS.REGION,
+  endpoint: config.AWS.ENDPOINT,
 });
 
 const params = {
-  TableName: config.AWS.TableName.company,
+  TableName: config.AWS.TABLE_NAME.COMPANY,
 };
 
 const docClient = new AWS.DynamoDB.DocumentClient();
@@ -70,7 +70,7 @@ exports.getCompany = async (req, res) => {
       Limit: 1,
     };
 
-    const { Items: items, Count: count } = await docClient
+    const { Items: items } = await docClient
       .query({
         ...params,
         ...condition,
@@ -79,7 +79,9 @@ exports.getCompany = async (req, res) => {
 
     res.status(200).json({
       message: 'success',
-      data: { items, count },
+      data: {
+        item: items[0],
+      },
     });
   } catch (error) {
     res.status(400).json({

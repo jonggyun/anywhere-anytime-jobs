@@ -5,8 +5,8 @@ const config = require('../../constant');
 const { userShcema } = require('../../schemas');
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool({
-  UserPoolId: config.AWS.UserPoolId,
-  ClientId: config.AWS.ClientId,
+  UserPoolId: config.AWS.USER_POOL_ID,
+  ClientId: config.AWS.CLIENT_ID,
 });
 
 exports.signUp = async (req, res) => {
