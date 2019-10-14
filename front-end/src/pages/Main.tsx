@@ -1,7 +1,11 @@
 import React from 'react';
 
-import HolderContainer from 'containers/HolderContainer';
+import Layout from 'components/common/Layout';
+// import HolderContainer from 'containers/HolderContainer';
+// import CompaniesContainer from 'containers/CompaniesContainer';
 
-const Main: React.FC = () => <HolderContainer />;
+const Main: React.FC = () => {
+  return <Layout />;
+};
 
 export default Main;
