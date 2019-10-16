@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import common from 'styles/common';
+import palette from 'styles/palette';
+
 const Wrapper = styled.section`
   width: 100vw;
-  height: 3.125rem;
+  height: ${common.headerHeight};
   position: fixed;
   display: flex;
   justify-content: center;
-  background-color: #283e4b;
+  background-color: ${palette.cyan9};
   color: #fff;
   font-weight: 900;
 `;
