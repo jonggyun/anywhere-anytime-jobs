@@ -20,6 +20,28 @@ const palette = {
   gray7: '#495057',
   gray8: '#343a40',
   gray9: '#212529',
+
+  indigo0: '#edf2ff',
+  indigo1: '#dbe4ff',
+  indigo2: '#bac8ff',
+  indigo3: '#91a7ff',
+  indigo4: '#748ffc',
+  indigo5: '#5c7cfa',
+  indigo6: '#4c6ef5',
+  indigo7: '#4263eb',
+  indigo8: '#3b5bdb',
+  indigo9: '#364fc7',
+
+  blue0: '#e7f5ff',
+  blue1: '#d0ebff',
+  blue2: '#a5d8ff',
+  blue3: '#74c0fc',
+  blue4: '#4dabf7',
+  blue5: '#339af0',
+  blue6: '#228be6',
+  blue7: '#1c7ed6',
+  blue8: '#1971c2',
+  blue9: '#1864ab',
 };
 
 export default palette;
