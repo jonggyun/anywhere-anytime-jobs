@@ -2,24 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Layout from 'components/common/Layout';
-import Login from 'components/Login';
+import LogIn from 'components/LogIn';
 
-const LoginWrapper = styled.section`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { CenterAlign } from 'styles/common';
 
-const LoginPage: React.FC = () => {
+const LogInWrapper = styled(CenterAlign)``;
+
+const LogInPage: React.FC = () => {
   return (
     <Layout>
-      <LoginWrapper>
-        <Login />
-      </LoginWrapper>
+      <LogInWrapper>
+        <LogIn />
+      </LogInWrapper>
     </Layout>
   );
 };
 
-export default LoginPage;
+export default LogInPage;

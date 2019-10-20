@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import palette from 'styles/palette';
-import { UnderLine } from 'styles/common';
 
 import Button from 'components/common/Button';
+import { UnderLine } from 'styles/common';
 
-const LogInWrapper = styled.section`
+const SignUpWrapper = styled.section`
   padding: 1.25rem;
   width: 23.125rem;
   border-radius: 0.3125rem;
@@ -23,7 +23,7 @@ const Title = styled.h1`
 `;
 
 const TitleBorder = styled(UnderLine)`
-  width: 3.125rem;
+  width: 4.375rem;
 `;
 
 const Input = styled.input`
@@ -49,22 +49,25 @@ const Content = styled(Link)`
   text-decoration: none;
 `;
 
-interface LogInProps {}
-const LogIn: React.FC<LogInProps> = () => (
-  <LogInWrapper>
-    <Title>LogIn</Title>
-    <TitleBorder />
-    <Input type="text" placeholder="이메일" autoComplete="off" />
-    <Input
-      type="password"
-      placeholder="비밀번호(숫자, 대소문자, 특수문자, 8자리 이상)"
-      autoComplete="off"
-    />
-    <Button disabled={false}>로그인</Button>
-    <Content to="/signup">
-      계정이 없으시다면? <b>회원가입</b>
-    </Content>
-  </LogInWrapper>
-);
+interface SignUpProps {}
+const SignUp: React.FC<SignUpProps> = () => {
+  return (
+    <SignUpWrapper>
+      <Title>SignUp</Title>
+      <TitleBorder />
+      <Input type="text" placeholder="이메일" autoComplete="off" />
+      <Input
+        type="password"
+        placeholder="비밀번호(숫자, 대소문자, 특수문자, 8자리 이상)"
+        autoComplete="off"
+      />
+      <Input type="password" placeholder="비밀번호 확인" autoComplete="off" />
+      <Button disabled={false}>회원가입</Button>
+      <Content to="/login">
+        이미 계정이 있으시다면? <b>로그인</b>
+      </Content>
+    </SignUpWrapper>
+  );
+};
 
-export default LogIn;
+export default SignUp;
