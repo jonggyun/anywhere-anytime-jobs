@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 import palette from 'styles/palette';
 
-const ButtonWrapper = styled.button<{
+interface ButtonWrapperProps {
   widthSize?: string;
-}>`
+}
+const ButtonWrapper = styled.button<ButtonWrapperProps>`
   width: ${({ widthSize }) => widthSize || '100%'};
   margin: 1rem 0;
   padding: 0.625rem 0;
@@ -16,6 +17,7 @@ const ButtonWrapper = styled.button<{
   color: #fff;
   outline: none;
   border: none;
+  user-select: none;
   background-color: ${palette.cyan9};
   &:hover {
     cursor: pointer;

@@ -38,7 +38,7 @@ const Title = styled.span`
 const Icon = styled.i`
   font-size: 1.5rem;
   margin-left: 1.25rem;
-
+  color: #fff;
   :hover {
     cursor: pointer;
   }
@@ -53,7 +53,9 @@ const Header = () => {
         </Title>
         <div>
           <Icon className="fas fa-pen" />
-          <Icon className="fas fa-sign-in-alt" />
+          <Link to="/login">
+            <Icon className="fas fa-sign-in-alt" />
+          </Link>
         </div>
       </Navigation>
     </Wrapper>
