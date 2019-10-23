@@ -18,14 +18,14 @@ const ButtonWrapper = styled.button<ButtonWrapperProps>`
   outline: none;
   border: none;
   user-select: none;
-  background-color: ${palette.cyan9};
+  background-color: ${palette.blue9};
   &:hover {
     cursor: pointer;
-    background-color: ${palette.cyan6};
+    background-color: ${palette.blue6};
   }
   &:disabled {
     cursor: not-allowed;
-    background-color: ${palette.cyan6};
+    background-color: ${palette.blue6};
   }
 `;
 

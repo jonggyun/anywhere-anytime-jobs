@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { UnderLine } from 'styles/common';
+import palette from 'styles/palette';
 
 import Button from 'components/common/Button';
 import InputBox from 'components/common/InputBox';
@@ -13,9 +14,8 @@ import useInputs from 'lib/hooks/useInputs';
 const LogInWrapper = styled.section`
   padding: 1.25rem;
   width: 23.125rem;
-  border-radius: 0.3125rem;
   background-color: #fff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid ${palette.gray2};
 `;
 
 const Title = styled.h1`

@@ -9,13 +9,13 @@ import { emailValidation, passwordValidation } from 'lib/regex';
 import useInputs from 'lib/hooks/useInputs';
 
 import { UnderLine } from 'styles/common';
+import palette from 'styles/palette';
 
 const SignUpWrapper = styled.section`
   padding: 1.25rem;
   width: 23.125rem;
-  border-radius: 0.3125rem;
   background-color: #fff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 1px solid ${palette.gray2};
 `;
 
 const Title = styled.h1`

@@ -12,12 +12,12 @@ export const CenterAlign = styled.section`
 
 export const UnderLine = styled.span`
   display: inline-block;
-  background-color: ${palette.cyan9};
+  background-color: ${palette.blue9};
   height: 0.375rem;
 `;
 
 const common = {
-  headerHeight: '3.125rem',
+  headerHeight: '6.25rem',
 };
 
 export default common;

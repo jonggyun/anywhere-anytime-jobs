@@ -11,9 +11,11 @@ const Wrapper = styled.section`
   position: fixed;
   display: flex;
   justify-content: center;
-  background-color: ${palette.cyan9};
   color: #fff;
   font-weight: 900;
+  z-index: 1;
+  background-color: #fff;
+  border-bottom: 1px solid ${palette.gray2};
 `;
 
 const Navigation = styled.nav`
@@ -24,23 +26,39 @@ const Navigation = styled.nav`
 `;
 
 const Title = styled.span`
+  color: ${palette.blue9};
+  font-size: 1.25rem;
+  font-weight: 700;
+
   a:link,
   a:active,
   a:visited {
-    color: #fff;
+    color: ${palette.blue9};
     text-decoration: none;
+    letter-spacing: -0.5px;
   }
   a:hover {
     cursor: pointer;
+    letter-spacing: -0.5px;
   }
 `;
 
-const Icon = styled.i`
-  font-size: 1.5rem;
-  margin-left: 1.25rem;
-  color: #fff;
+const Login = styled.span`
+  padding: 0.5rem 1.75rem;
+  box-sizing: content-box;
+  border: 1px solid ${palette.gray3};
+  border-radius: 1.25rem;
+  color: ${palette.blue9};
+  font-size: 0.75rem;
+  :link,
+  :active,
+  :visited {
+    color: ${palette.blue9};
+  }
   :hover {
-    cursor: pointer;
+    background-color: ${palette.blue9};
+    color: #fff;
+    border: 1px solid ${palette.blue9};
   }
 `;
 
@@ -49,12 +67,13 @@ const Header = () => {
     <Wrapper>
       <Navigation>
         <Title>
-          <Link to="/">Anywhere Anytime Jobs</Link>
+          <Link to="/">
+            <span>Anywhere Anytime Jobs</span>
+          </Link>
         </Title>
         <div>
-          <Icon className="fas fa-pen" />
           <Link to="/login">
-            <Icon className="fas fa-sign-in-alt" />
+            <Login>LOGIN</Login>
           </Link>
         </div>
       </Navigation>

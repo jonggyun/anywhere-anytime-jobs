@@ -6,8 +6,7 @@ import Header from './Header';
 import common from 'styles/common';
 
 const Content = styled.section`
-  position: fixed;
-  top: ${common.headerHeight};
+  padding-top: ${common.headerHeight};
   width: 100%;
   display: flex;
   justify-content: center;

@@ -2,12 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Layout from 'components/common/Layout';
-// import JobCards from 'components/JobCards';
 import JobCardsContainer from 'containers/JobCardsContainer';
 
 const Wrapper = styled.section`
   width: 68.75rem;
-  background-color: #fff;
   padding: 2rem 0.5rem;
 `;
 
@@ -22,7 +20,7 @@ const Main: React.FC = () => {
   return (
     <Layout>
       <Wrapper>
-        <Title>전체</Title>
+        {/* <Title>전체</Title> */}
         <JobCardsContainer />
       </Wrapper>
     </Layout>
