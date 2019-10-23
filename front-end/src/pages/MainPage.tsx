@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Layout from 'components/common/Layout';
-import JobCards from 'components/JobCards';
-// import HolderContainer from 'containers/HolderContainer';
-// import CompaniesContainer from 'containers/CompaniesContainer';
+// import JobCards from 'components/JobCards';
+import JobCardsContainer from 'containers/JobCardsContainer';
 
 const Wrapper = styled.section`
   width: 68.75rem;
@@ -24,7 +23,7 @@ const Main: React.FC = () => {
     <Layout>
       <Wrapper>
         <Title>전체</Title>
-        <JobCards />
+        <JobCardsContainer />
       </Wrapper>
     </Layout>
   );

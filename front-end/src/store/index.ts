@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-
-import holderReducer from './holder/reducer';
-import holderSaga from './holder/sagas';
-
-import { HolderState } from './holder/types';
+import jobReducer from './job/reducer';
+import jobSaga from './job/sagas';
+import { JobState } from './job/types';
 
 const rootReducer = combineReducers({
-  holderReducer,
+  job: jobReducer,
 });
 
 export default rootReducer;
 
-export type RootState = HolderState;
+export type RootState = {
+  job: JobState;
+};
 
 export function* rootSaga() {
-  yield all([holderSaga()]);
+  yield all([jobSaga()]);
 }

@@ -24,8 +24,8 @@ exports.getAllCompanies = async (req, res) => {
       .promise();
 
     res.status(200).json({
-      message: 'success',
-      data: { items, count },
+      jobs: items,
+      count,
     });
   } catch (error) {
     res.status(400).json({
@@ -79,10 +79,7 @@ exports.getCompany = async (req, res) => {
       .promise();
 
     res.status(200).json({
-      message: 'success',
-      data: {
-        item: items[0],
-      },
+      item: items[0],
     });
   } catch (error) {
     res.status(400).json({
@@ -157,7 +154,7 @@ exports.getCompanyNews = async (req, res) => {
     );
 
     res.status(200).json({
-      data: items,
+      news: items,
     });
   } catch (error) {
     res.status(400).json({
