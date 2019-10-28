@@ -6,7 +6,7 @@ import { GET_JSON_REQUEST, GET_JSON_SUCCESS, GET_JSON_FAILURE } from './types';
 function* getJson() {
   try {
     const { data } = yield call(() =>
-      axios.get('https://jsonplaceholder.typicode.com/posts/1')
+      axios.get('https://jsonplaceholder.typicode.com/posts/1'),
     );
 
     yield put({

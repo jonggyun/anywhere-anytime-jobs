@@ -12,7 +12,7 @@ const initialState: JobState = {
 };
 
 const reducer = (state = initialState, action: JobTypes) =>
-  produce(state, (draft) => {
+  produce(state, draft => {
     switch (action.type) {
       case GET_ALL_JOBS_REQUEST:
         break;

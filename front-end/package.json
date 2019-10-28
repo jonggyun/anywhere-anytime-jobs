@@ -33,10 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:fix": "eslint './src/**/*.{ts,tsx}'"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "eslint": "eslint './src/**/*.{ts,tsx}'"
   },
   "browserslist": {
     "production": [

@@ -15,7 +15,7 @@ interface JobCardsProps {
 const JobCards: React.FC<JobCardsProps> = ({ jobs }) => {
   return (
     <Wrapper>
-      {jobs.map((job) => (
+      {jobs.map(job => (
         <JobCard
           key={job.companyId}
           company={job.company}

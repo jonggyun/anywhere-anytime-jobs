@@ -17,7 +17,7 @@ const initialState: HolderState = {
 };
 
 const reducer = (state = initialState, action: HolderTypes): HolderState =>
-  produce(state, (draft) => {
+  produce(state, draft => {
     switch (action.type) {
       case GET_JSON_REQUEST:
         break;
