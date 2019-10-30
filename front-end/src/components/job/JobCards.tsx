@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import JobCard from 'components/JobCard';
+import JobCardContainer from 'containers/job/JobCardConatiner';
 import { JobType } from 'store/job/types';
 
 const Wrapper = styled.section`
@@ -16,8 +16,9 @@ const JobCards: React.FC<JobCardsProps> = ({ jobs }) => {
   return (
     <Wrapper>
       {jobs.map(job => (
-        <JobCard
+        <JobCardContainer
           key={job.companyId}
+          companyId={job.companyId}
           company={job.company}
           location={job.location}
           anywhere={job.anywhere}

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import palette from 'styles/palette';
 
+import Badge from 'components/common/Badge';
+
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
@@ -54,24 +56,10 @@ const Location = styled.span`
 
 const PossibleContent = styled.span`
   text-align: right;
-  font-size: 0.625rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: ${palette.gray0};
-`;
-
-interface BadgeProps {
-  type: string;
-}
-const Badge = styled.span<BadgeProps>`
-  padding: 0.25rem 0.875rem;
-  margin-left: 0.3125rem;
-  border-radius: 1rem;
-  background-color: ${({ type }) =>
-    type === 'anywhere' ? `${palette.blue9}` : `${palette.blue6}`};
 `;
 
 interface JobCardProps {
+  handleOnClick: () => void;
   company: string;
   location: string;
   anywhere?: {
@@ -84,13 +72,14 @@ interface JobCardProps {
   };
 }
 const JobCard: React.FC<JobCardProps> = ({
+  handleOnClick,
   company,
   location,
   anywhere,
   anytime,
 }) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={handleOnClick}>
       <Image src="https://fakeimg.pl/75x75" alt="company_image" />
       <Company>{company}</Company>
       <Location>
@@ -101,8 +90,8 @@ const JobCard: React.FC<JobCardProps> = ({
         )}
       </Location>
       <PossibleContent>
-        {anywhere && <Badge type="anywhere">Anywhere</Badge>}
-        {anytime && <Badge type="anytime">Anytime</Badge>}
+        {anywhere && <Badge name="anywhere">Anywhere</Badge>}
+        {anytime && <Badge name="anytime">Anytime</Badge>}
       </PossibleContent>
     </Wrapper>
   );

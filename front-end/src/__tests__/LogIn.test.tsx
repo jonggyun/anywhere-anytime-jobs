@@ -2,7 +2,7 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
-import LogIn from 'components/Login';
+import LogIn from 'components/auth/LogIn';
 
 describe('<LogIn />', () => {
   it('has input and button', () => {
@@ -10,7 +10,7 @@ describe('<LogIn />', () => {
     const { getByText, getByPlaceholderText } = render(
       <Router history={history}>
         <LogIn />
-      </Router>
+      </Router>,
     );
     getByText('LogIn');
     getByPlaceholderText('이메일');

@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Layout from 'components/common/Layout';
-import Footer from 'components/Footer';
+import Footer from 'components/common/Footer';
 
-import JobCardsContainer from 'containers/JobCardsContainer';
+import JobCardsContainer from 'containers/job/JobCardsContainer';
 
 const Wrapper = styled.section`
   width: 68.75rem;
