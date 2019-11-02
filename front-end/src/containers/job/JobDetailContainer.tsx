@@ -10,7 +10,7 @@ import JobDetail from 'components/job/JobDetail';
 const JobDetailContainer = () => {
   const { companyId } = useParams();
   const dispatch = useDispatch();
-  const { job } = useSelector((state: RootState) => state.job);
+  const { item, news } = useSelector((state: RootState) => state.job.job);
 
   useEffect(() => {
     if (companyId) dispatch(getJobRequest(companyId));
@@ -19,12 +19,13 @@ const JobDetailContainer = () => {
 
   return (
     <JobDetail
-      company={job.company}
-      homepage={job.homepage}
-      location={job.location}
-      anywhere={job.anywhere}
-      anytime={job.anytime}
-      description={job.description}
+      company={item.company}
+      homepage={item.homepage}
+      location={item.location}
+      anywhere={item.anywhere}
+      anytime={item.anytime}
+      description={item.description}
+      news={news}
     />
   );
 };

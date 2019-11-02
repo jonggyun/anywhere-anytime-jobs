@@ -1,16 +1,67 @@
 import React from 'react';
 import styled from 'styled-components';
+import format from 'date-fns/format';
 
-const Wrapper = styled.article``;
+import { NewsType } from 'store/job/types';
 
-interface JobNewsProps {}
-const JobNews: React.FC<JobNewsProps> = () => {
+import { UnderLine } from 'styles/common';
+import palette from 'styles/palette';
+
+const Wrapper = styled.article`
+  margin-top: 1rem;
+`;
+
+const Title = styled.h3`
+  font-size: 1.25rem;
+  padding: 0;
+  margin: 0;
+`;
+
+const News = styled.div`
+  margin-top: 1rem;
+  line-height: 1.2;
+  :hover {
+    cursor: pointer;
+    font-weight: 700;
+  }
+`;
+
+const NewsBorder = styled(UnderLine)`
+  width: 3.75rem;
+  display: block;
+`;
+
+const NewsTitle = styled.span`
+  display: block;
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+const NewsDate = styled.span`
+  display: inline-block;
+  font-size: 0.75rem;
+  color: ${palette.gray5};
+`;
+
+interface JobNewsProps {
+  news: Array<NewsType>;
+}
+const JobNews: React.FC<JobNewsProps> = ({ news }) => {
+  const handleOnClick = (link: string) => {
+    window.open(link, '_blank');
+  };
   return (
     <Wrapper>
-      <h3>NEWS</h3>
-      <div>기사 링크를 걸어둡니다.</div>
-      <div>기사 링크를 걸어둡니다.</div>
-      <div>기사 링크를 걸어둡니다.</div>
+      <Title>NEWS</Title>
+      <NewsBorder />
+      {news.map(item => (
+        <News key={item.title} onClick={() => handleOnClick(item.link)}>
+          <NewsTitle>{item.title}</NewsTitle>
+          <NewsDate>{format(new Date(item.pubDate), 'yyyy.MM.dd')}</NewsDate>
+        </News>
+      ))}
     </Wrapper>
   );
 };

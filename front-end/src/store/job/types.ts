@@ -14,9 +14,20 @@ export interface JobType {
   apply: string;
 }
 
+export interface NewsType {
+  title: string;
+  originallink: string;
+  link: string;
+  description: string;
+  pubDate: string;
+}
+
 export interface JobState {
   list: Array<JobType>;
-  job: JobType;
+  job: {
+    item: JobType;
+    news: Array<NewsType>;
+  };
 }
 
 export const GET_ALL_JOBS_REQUEST = 'company/GET_ALL_JOBS_REQUEST';
@@ -42,7 +53,10 @@ export interface GetJobRequestAction {
 
 export interface GetJobSuccessAction {
   type: typeof GET_JOB_SUCCESS;
-  data: JobType;
+  data: {
+    item: JobType;
+    news: Array<NewsType>;
+  };
 }
 
 export interface GetJobFailureAction {

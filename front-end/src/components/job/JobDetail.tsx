@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import palette from 'styles/palette';
@@ -6,6 +6,7 @@ import palette from 'styles/palette';
 import Badge from 'components/common/Badge';
 import JobContent from 'components/job/JobContent';
 import JobNews from 'components/job/JobNews';
+import JobMap from 'components/job/JobMap';
 
 const Wrapper = styled.section`
   width: inherit;
@@ -61,6 +62,7 @@ interface JobDetailProps {
     permission: boolean;
   };
   description: string;
+  news: Array<any>;
 }
 const JobDetail: React.FC<JobDetailProps> = ({
   company,
@@ -69,7 +71,9 @@ const JobDetail: React.FC<JobDetailProps> = ({
   anywhere,
   anytime,
   description,
+  news,
 }) => {
+  useEffect(() => {}, []);
   return (
     <Wrapper>
       <Image src="https://fakeimg.pl/100x100" />
@@ -84,13 +88,21 @@ const JobDetail: React.FC<JobDetailProps> = ({
       </div>
       <ContentWrapper>
         <MainInfo>
-          <JobContent title="회사소개" content={description} />
-          {anywhere && <JobContent title="Anywhere" content={anywhere.rule} />}
-          {anytime && <JobContent title="Anytime" content={anytime.rule} />}
+          <JobContent type="company" title="회사소개" content={description} />
+          {anywhere && (
+            <JobContent
+              type="anywhere"
+              title="Anywhere"
+              content={anywhere.rule}
+            />
+          )}
+          {anytime && (
+            <JobContent type="anytime" title="Anytime" content={anytime.rule} />
+          )}
         </MainInfo>
         <SideInfo>
-          <div>지도를 나타냅니다.</div>
-          <JobNews />
+          <JobMap company={company} location={location} />
+          <JobNews news={news} />
         </SideInfo>
       </ContentWrapper>
     </Wrapper>

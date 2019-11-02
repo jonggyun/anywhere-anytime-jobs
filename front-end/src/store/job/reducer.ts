@@ -13,20 +13,23 @@ import {
 const initialState: JobState = {
   list: [],
   job: {
-    anywhere: {
-      rule: '',
-      permission: false,
+    item: {
+      anywhere: {
+        rule: '',
+        permission: false,
+      },
+      anytime: {
+        rule: '',
+        permission: false,
+      },
+      location: '',
+      description: '',
+      companyId: '',
+      homepage: '',
+      company: '',
+      apply: '',
     },
-    anytime: {
-      rule: '',
-      permission: false,
-    },
-    location: '',
-    description: '',
-    companyId: '',
-    homepage: '',
-    company: '',
-    apply: '',
+    news: [],
   },
 };
 

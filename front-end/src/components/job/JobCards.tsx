@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import JobCardContainer from 'containers/job/JobCardConatiner';
 import { JobType } from 'store/job/types';
+
+import JobCardContainer from 'containers/job/JobCardConatiner';
 
 const Wrapper = styled.section`
   display: flex;
@@ -10,6 +11,7 @@ const Wrapper = styled.section`
 `;
 
 interface JobCardsProps {
+  // isLoading: boolean;
   jobs: Array<JobType>;
 }
 const JobCards: React.FC<JobCardsProps> = ({ jobs }) => {

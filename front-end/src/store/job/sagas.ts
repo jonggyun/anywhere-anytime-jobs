@@ -37,9 +37,17 @@ function* getJob(action: GetJobRequestAction) {
     const {
       data: { item },
     } = yield call(() => axios.get(`/company/${action.companyId}`));
+
+    const {
+      data: { news },
+    } = yield call(() => axios.get(`/company/news/${item.company}`));
+
     yield put({
       type: GET_JOB_SUCCESS,
-      data: item,
+      data: {
+        item,
+        news,
+      },
     });
   } catch (error) {
     yield put({

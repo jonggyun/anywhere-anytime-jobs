@@ -6,6 +6,7 @@ import Header from './Header';
 import common from 'styles/common';
 
 const Content = styled.section`
+  position: relative;
   padding-top: ${common.headerHeight};
   width: 100%;
   display: flex;
