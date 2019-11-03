@@ -50,7 +50,7 @@ interface JobNewsProps {
 }
 const JobNews: React.FC<JobNewsProps> = ({ news }) => {
   const handleOnClick = (link: string) => {
-    window.open(link, '_blank');
+    window.open(link, '_blank', 'noopener noreferrer');
   };
   return (
     <Wrapper>

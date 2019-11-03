@@ -10,13 +10,13 @@ const Wrapper = styled.article`
 
 const JobContent = () => (
   <Wrapper>
-    <Skeleton height="50px" width="100px" borderRadius="0" />
-    <Skeleton height="10px" width="100px" borderRadius="0" />
-    <Skeleton height="20px" width="200px" borderRadius="0" />
-    <Skeleton height="20px" width="200px" borderRadius="0" />
-    <Skeleton height="20px" width="200px" borderRadius="0" />
-    <Skeleton height="20px" width="200px" borderRadius="0" />
-    <Skeleton height="20px" width="200px" borderRadius="0" />
+    <Skeleton height="3.125rem" width="6.25rem" marginBottom="0.5rem" />
+    <Skeleton height="0.625rem" width="6.25rem" marginBottom="0.5rem" />
+    <Skeleton height="1.25rem" width="28.125rem" marginBottom="0.5rem" />
+    <Skeleton height="1.25rem" width="25rem" marginBottom="0.5rem" />
+    <Skeleton height="1.25rem" width="29.375rem" marginBottom="0.5rem" />
+    <Skeleton height="1.25rem" width="26.875rem" marginBottom="0.5rem" />
+    <Skeleton height="1.25rem" width="25rem" />
   </Wrapper>
 );
 

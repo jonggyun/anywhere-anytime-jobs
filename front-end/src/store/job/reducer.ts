@@ -31,6 +31,7 @@ const initialState: JobState = {
     },
     news: [],
   },
+  loading: true,
 };
 
 const reducer = (state = initialState, action: JobTypes) =>
@@ -43,10 +44,14 @@ const reducer = (state = initialState, action: JobTypes) =>
         draft.list = action.data;
         break;
       case GET_JOB_REQUEST:
+        draft.loading = true;
+        break;
       case GET_JOB_FAILURE:
+        draft.loading = false;
         break;
       case GET_JOB_SUCCESS:
         draft.job = action.data;
+        draft.loading = false;
         break;
       default:
         break;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import palette from 'styles/palette';
@@ -7,6 +7,8 @@ import Badge from 'components/common/Badge';
 import JobContent from 'components/job/JobContent';
 import JobNews from 'components/job/JobNews';
 import JobMap from 'components/job/JobMap';
+
+import { RuleType, NewsType } from 'store/job/types';
 
 const Wrapper = styled.section`
   width: inherit;
@@ -36,6 +38,13 @@ const InfoText = styled.span`
   margin-right: 1.5rem;
 `;
 
+const Homepage = styled(InfoText)`
+  :hover {
+    cursor: pointer;
+    font-weight: 700;
+  }
+`;
+
 const ContentWrapper = styled.div`
   display: flex;
 `;
@@ -50,21 +59,17 @@ const SideInfo = styled.article`
 `;
 
 interface JobDetailProps {
+  onClickHomePage: (homepage: string) => void;
   company: string;
   homepage: string;
   location: string;
-  anywhere: {
-    rule: string;
-    permission: boolean;
-  };
-  anytime: {
-    rule: string;
-    permission: boolean;
-  };
+  anywhere: RuleType;
+  anytime: RuleType;
   description: string;
-  news: Array<any>;
+  news: Array<NewsType>;
 }
 const JobDetail: React.FC<JobDetailProps> = ({
+  onClickHomePage,
   company,
   homepage,
   location,
@@ -73,13 +78,16 @@ const JobDetail: React.FC<JobDetailProps> = ({
   description,
   news,
 }) => {
-  useEffect(() => {}, []);
   return (
     <Wrapper>
       <Image src="https://fakeimg.pl/100x100" />
       <Name>{company}</Name>
       <Info>
-        {homepage && <InfoText>{homepage}</InfoText>}
+        {homepage && (
+          <Homepage onClick={() => onClickHomePage(homepage)}>
+            {homepage}
+          </Homepage>
+        )}
         {location && <InfoText>{location}</InfoText>}
       </Info>
       <div>

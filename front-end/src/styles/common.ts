@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import palette from 'styles/palette';
 
@@ -19,14 +19,33 @@ export const UnderLine = styled.span`
 interface SkeletonProps {
   width: string;
   height: string;
-  borderRadius: string;
+  borderRadius?: string;
+  marginTop?: string;
+  marginBottom?: string;
 }
 export const Skeleton = styled.div<SkeletonProps>`
   width: ${({ width }) => `${width}`};
   height: ${({ height }) => `${height}`};
-  border-radius: ${({ borderRadius }) => `${borderRadius}`};
   background-color: ${palette.gray2};
   margin-left: 0.3125rem;
+
+  ${({ borderRadius }) =>
+    borderRadius &&
+    css`
+      border-radius: ${borderRadius};
+    `};
+
+  ${({ marginTop }) =>
+    marginTop &&
+    css`
+      margin-top: ${marginTop};
+    `};
+
+  ${({ marginBottom }) =>
+    marginBottom &&
+    css`
+      margin-bottom: ${marginBottom};
+    `};
 `;
 
 const common = {

@@ -65,8 +65,15 @@ const JobMap: React.FC<JobMapProps> = ({ company, location }) => {
 
   useEffect(() => {
     if (location) setCompanyMap();
+
+    return () => {
+      const container = document.getElementById('map');
+      if (container && container.hasChildNodes()) {
+        container.removeChild(container.childNodes[0]);
+      }
+    };
   });
-  console.log('location', location);
+
   return (
     <React.Fragment>
       <Title>How to Find Us</Title>

@@ -1,4 +1,4 @@
-interface RuleType {
+export interface RuleType {
   rule: string;
   permission: boolean;
 }
@@ -28,6 +28,7 @@ export interface JobState {
     item: JobType;
     news: Array<NewsType>;
   };
+  loading: boolean;
 }
 
 export const GET_ALL_JOBS_REQUEST = 'company/GET_ALL_JOBS_REQUEST';
@@ -49,6 +50,7 @@ interface JobsAction {
 export interface GetJobRequestAction {
   type: typeof GET_JOB_REQUEST;
   companyId: string;
+  loading: boolean;
 }
 
 export interface GetJobSuccessAction {
@@ -57,10 +59,12 @@ export interface GetJobSuccessAction {
     item: JobType;
     news: Array<NewsType>;
   };
+  loading: boolean;
 }
 
 export interface GetJobFailureAction {
   type: typeof GET_JOB_FAILURE;
+  loading: boolean;
 }
 
 type JobAction =

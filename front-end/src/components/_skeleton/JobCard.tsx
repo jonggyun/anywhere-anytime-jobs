@@ -28,11 +28,11 @@ const JobCard: React.FC = () => {
   return (
     <Wrapper>
       <Skeleton height="4.6875rem" width="4.6875rem" borderRadius="0.3125rem" />
-      <Skeleton height="1.25rem" width="80%" borderRadius="0" />
-      <Skeleton height="1rem" width="100%" borderRadius="0" />
+      <Skeleton height="1.25rem" width="80%" />
+      <Skeleton height="1rem" width="100%" />
       <PossibleContent>
-        <Skeleton height="1.25rem" width="5.625rem" borderRadius="0" />
-        <Skeleton height="1.25rem" width="5.625rem" borderRadius="0" />
+        <Skeleton height="1.25rem" width="5.625rem" />
+        <Skeleton height="1.25rem" width="5.625rem" />
       </PossibleContent>
     </Wrapper>
   );
