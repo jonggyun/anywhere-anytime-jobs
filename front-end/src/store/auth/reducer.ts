@@ -11,10 +11,8 @@ import {
 const initalState: AuthState = {
   loading: false,
   error: false,
-  me: {
-    accessToken: '',
-    idToken: '',
-  },
+  isLoggedIn: false,
+  email: '',
 };
 
 const reducer = (state = initalState, action: AuthTypes) =>
@@ -26,14 +24,16 @@ const reducer = (state = initalState, action: AuthTypes) =>
         break;
       case LOGIN_SUCCESS:
         draft.loading = false;
-        draft.me = { accessToken: action.accessToken, idToken: action.idToken };
+        draft.isLoggedIn = true;
+        draft.email = action.email;
         break;
       case LOGIN_FAILURE:
         draft.loading = false;
         draft.error = true;
         break;
       case ME_REQUEST:
-        draft.me = { accessToken: action.accessToken, idToken: action.idToken };
+        draft.isLoggedIn = true;
+        draft.email = action.email;
         break;
       default:
         break;

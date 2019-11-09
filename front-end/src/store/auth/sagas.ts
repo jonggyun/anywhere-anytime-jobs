@@ -1,5 +1,5 @@
-import { takeLatest, all, call, put } from 'redux-saga/effects';
-import axios from 'axios';
+import { takeLatest, all, put } from 'redux-saga/effects';
+import { Auth } from 'aws-amplify';
 
 import {
   LoginRequestAction,
@@ -10,19 +10,10 @@ import {
 
 function* login({ email, password }: LoginRequestAction) {
   try {
-    const {
-      data: { accessToken, idToken },
-    } = yield call(axios.post, 'auth/login', {
-      username: email,
-      password,
-    });
-
-    sessionStorage.setItem('anywhere-anytime-jobs:accessToken', accessToken);
-    sessionStorage.setItem('anywhere-anytime-jobs:idToken', idToken);
+    yield Auth.signIn(email, password);
     yield put({
       type: LOGIN_SUCCESS,
-      accessToken,
-      idToken,
+      email,
     });
   } catch (error) {
     yield put({

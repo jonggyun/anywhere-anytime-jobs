@@ -12,14 +12,9 @@ interface LoginContainerProps {}
 const LoginContainer: React.FC<LoginContainerProps> = () => {
   const dispatch = useDispatch();
   const { push } = useHistory();
-  const { error, loading, me } = useSelector((state: RootState) => state.auth);
+  const { error, loading } = useSelector((state: RootState) => state.auth);
   const [email, onChangeEmail] = useInputs('');
   const [password, onChangePassword] = useInputs('');
-
-  useEffect(() => {
-    if (me.accessToken && me.idToken) push('/');
-    return () => {};
-  }, [me]);
 
   const onClickLogin = async () => {
     await dispatch(loginRequest({ email, password }));

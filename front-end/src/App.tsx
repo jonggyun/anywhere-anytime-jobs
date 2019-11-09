@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Route } from 'react-router-dom';
 
 import MainPage from 'pages/MainPage';
@@ -8,18 +9,28 @@ import SignUpPage from 'pages/SignUpPage';
 import JobDetailPage from 'pages/JobDetailPage';
 
 import { meRequest } from 'store/auth/actions';
+import { Auth } from 'aws-amplify';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
+  const { push } = useHistory();
+
+  const checkUserSession = async () => {
+    try {
+      await Auth.currentSession();
+      const {
+        attributes: { email },
+      } = await Auth.currentAuthenticatedUser({ bypassCache: false });
+      dispatch(meRequest({ email }));
+      push('/');
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem(
-      'anywhere-anytime-jobs:accessToken',
-    );
-    const idToken = sessionStorage.getItem('anywhere-anytime-jobs:idToken');
-
-    if (accessToken && idToken) dispatch(meRequest({ accessToken, idToken }));
-  });
+    checkUserSession();
+  }, []);
   return (
     <>
       <Route exact path="/" component={MainPage} />

@@ -17,30 +17,15 @@ export const loginRequest = ({
   password,
 });
 
-export const loginSuccess = ({
-  accessToken,
-  idToken,
-}: {
-  accessToken: string;
-  idToken: string;
-}) => ({
+export const loginSuccess = () => ({
   type: LOGIN_SUCCESS,
-  accessToken,
-  idToken,
 });
 
 export const loginFailure = () => ({
   type: LOGIN_FAILURE,
 });
 
-export const meRequest = ({
-  accessToken,
-  idToken,
-}: {
-  accessToken: string;
-  idToken: string;
-}) => ({
+export const meRequest = ({ email }: { email: string }) => ({
   type: ME_REQUEST,
-  accessToken,
-  idToken,
+  email,
 });

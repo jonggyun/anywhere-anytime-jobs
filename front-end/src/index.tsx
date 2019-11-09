@@ -6,12 +6,24 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { logger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import Amplify from 'aws-amplify';
+import config from './config';
 
 import reducers, { rootSaga } from './store';
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: config.cognito.REGION,
+    userPoolId: config.cognito.USER_POOL_ID,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.cognito.CLIENT_ID,
+  },
+});
 
 const bindMiddleware = (middleware: Array<any>) => {
   if (process.env.NODE_ENV !== 'production') {

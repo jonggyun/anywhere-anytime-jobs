@@ -1,10 +1,8 @@
 export interface AuthState {
   loading: boolean;
   error: boolean;
-  me: {
-    accessToken: string;
-    idToken: string;
-  };
+  isLoggedIn: boolean;
+  email: string;
 }
 
 export const LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
@@ -23,8 +21,8 @@ export interface LoginRequestAction {
 export interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
   loading: boolean;
-  accessToken: string;
-  idToken: string;
+  isLoggedIn: boolean;
+  email: string;
 }
 
 export interface LoginFailureAction {
@@ -35,8 +33,7 @@ export interface LoginFailureAction {
 
 export interface MeRequestAction {
   type: typeof ME_REQUEST;
-  accessToken: string;
-  idToken: string;
+  email: string;
 }
 
 type LoginAction = LoginRequestAction | LoginSuccessAction | LoginFailureAction;
