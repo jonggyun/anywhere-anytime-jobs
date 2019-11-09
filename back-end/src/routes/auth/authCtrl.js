@@ -12,10 +12,10 @@ const userPool = new AmazonCognitoIdentity.CognitoUserPool({
 exports.signUp = async (req, res) => {
   try {
     const validated = await Joi.validate(req.body, userShcema);
-    const { username, password, email } = validated;
+    const { username, password } = validated;
 
     const attributeList = [];
-    const dataEmail = { Name: 'email', Value: email };
+    const dataEmail = { Name: 'email', Value: username };
     const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(
       dataEmail,
     );
@@ -62,12 +62,12 @@ exports.logIn = async (req, res) => {
       },
       onFailure: err => {
         const { name, message } = err;
-        res.status(400).json({ error: { name, message } });
+        res.status(403).json({ error: { name, message } });
       },
     });
   } catch (e) {
     const { name, message } = e;
-    res.status(400).json({ error: { name, message } });
+    res.status(403).json({ error: { name, message } });
   }
 };
 

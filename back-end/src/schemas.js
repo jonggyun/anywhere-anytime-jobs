@@ -1,17 +1,17 @@
 const Joi = require('@hapi/joi');
 
 exports.userShcema = Joi.object().keys({
-  username: Joi.string()
-    .min(8)
-    .max(15)
-    .regex(/^[a-zA-Z0-9]+/)
-    .required(),
+  // username: Joi.string()
+  //   .min(8)
+  //   .max(15)
+  //   .regex(/^[a-zA-Z0-9]+/)
+  //   .required(),
   password: Joi.string()
     .regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/,
     )
     .required(),
-  email: Joi.string()
+  username: Joi.string()
     .regex(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]/)
     .required(),
 });

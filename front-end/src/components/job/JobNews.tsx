@@ -7,6 +7,8 @@ import { NewsType } from 'store/job/types';
 import { UnderLine } from 'styles/common';
 import palette from 'styles/palette';
 
+import { htmlConvertToString } from 'lib/regex';
+
 const Wrapper = styled.article`
   margin-top: 1rem;
 `;
@@ -52,13 +54,14 @@ const JobNews: React.FC<JobNewsProps> = ({ news }) => {
   const handleOnClick = (link: string) => {
     window.open(link, '_blank', 'noopener noreferrer');
   };
+
   return (
     <Wrapper>
       <Title>NEWS</Title>
       <NewsBorder />
       {news.map(item => (
         <News key={item.title} onClick={() => handleOnClick(item.link)}>
-          <NewsTitle>{item.title}</NewsTitle>
+          <NewsTitle>{htmlConvertToString(item.title)}</NewsTitle>
           <NewsDate>{format(new Date(item.pubDate), 'yyyy.MM.dd')}</NewsDate>
         </News>
       ))}

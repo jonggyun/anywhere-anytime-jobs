@@ -9,7 +9,6 @@ import Button from 'components/common/Button';
 import InputBox from 'components/common/InputBox';
 
 import { emailValidation, passwordValidation } from 'lib/regex';
-import useInputs from 'lib/hooks/useInputs';
 
 const LogInWrapper = styled.section`
   padding: 1.25rem;
@@ -42,11 +41,34 @@ const Content = styled(Link)`
   text-decoration: none;
   user-select: none;
 `;
+const ButtonWrapper = styled.div`
+  position: relative;
+`;
 
-interface LogInProps {}
-const LogIn: React.FC<LogInProps> = () => {
-  const [email, onChangeEmail] = useInputs('');
-  const [password, onChangePassword] = useInputs('');
+const AlertMessage = styled.span`
+  position: absolute;
+  font-size: 0.625rem;
+  color: #e03131;
+`;
+
+interface LogInProps {
+  loading: boolean;
+  email: string;
+  password: string;
+  onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickLogin: () => void;
+  isError: boolean;
+}
+const LogIn: React.FC<LogInProps> = ({
+  loading,
+  email,
+  password,
+  onChangeEmail,
+  onChangePassword,
+  onClickLogin,
+  isError,
+}) => {
   const isValidEmail = emailValidation(email);
   const isValidPassword = passwordValidation(password);
 
@@ -75,7 +97,20 @@ const LogIn: React.FC<LogInProps> = () => {
         isValid={isValidPassword}
         alertMessage="비밀번호(숫자, 대소문자, 특수문자, 8자리 이상)"
       />
-      <Button disabled={isDisabled}>로그인</Button>
+      <ButtonWrapper>
+        {isError && (
+          <AlertMessage>
+            가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
+          </AlertMessage>
+        )}
+        <Button
+          disabled={isDisabled}
+          isLoading={loading}
+          onClick={onClickLogin}
+        >
+          로그인
+        </Button>
+      </ButtonWrapper>
       <Content to="/signup">
         계정이 없으시다면? <b>회원가입</b>
       </Content>

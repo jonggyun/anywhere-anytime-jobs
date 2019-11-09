@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import palette from 'styles/palette';
 
@@ -28,17 +28,46 @@ const ButtonWrapper = styled.button<ButtonWrapperProps>`
     background-color: ${palette.blue6};
   }
 `;
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const Spinner = styled.i`
+  animation: ${rotate} 0.5s linear infinite;
+`;
 
 interface ButtonProps {
   widthSize?: string;
   disabled: boolean;
+  isLoading?: boolean;
+  onClick?: () => void;
 }
-const Button: React.FC<ButtonProps> = ({ children, widthSize, disabled }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  widthSize,
+  disabled,
+  isLoading,
+  onClick,
+}) => {
   return (
-    <ButtonWrapper widthSize={widthSize} disabled={disabled}>
-      {children}
+    <ButtonWrapper
+      widthSize={widthSize}
+      disabled={disabled || isLoading}
+      onClick={onClick}
+    >
+      {!isLoading && children}
+      {isLoading && <Spinner className="fas fa-circle-notch" />}
     </ButtonWrapper>
   );
 };
 
 export default Button;
+
+Button.defaultProps = {
+  isLoading: false,
+  disabled: false,
+};
