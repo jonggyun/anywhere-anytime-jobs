@@ -6,6 +6,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   ME_REQUEST,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from './types';
 
 const initalState: AuthState = {
@@ -34,6 +40,25 @@ const reducer = (state = initalState, action: AuthTypes) =>
       case ME_REQUEST:
         draft.isLoggedIn = true;
         draft.email = action.email;
+        break;
+      case SIGNUP_REQUEST:
+        draft.loading = true;
+        draft.error = false;
+        break;
+      case SIGNUP_SUCCESS:
+        draft.loading = false;
+        draft.email = action.email;
+        break;
+      case SIGNUP_FAILURE:
+        draft.loading = false;
+        draft.error = true;
+        break;
+      case LOGOUT_REQUEST:
+        break;
+      case LOGOUT_SUCCESS:
+        draft.isLoggedIn = false;
+        break;
+      case LOGOUT_FAILURE:
         break;
       default:
         break;

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { RootState } from 'store';
 
 import common from 'styles/common';
 import palette from 'styles/palette';
+
+import SubMenu from 'components/common/SubMenu';
 
 const Wrapper = styled.section`
   width: 100vw;
@@ -62,7 +67,28 @@ const Login = styled.span`
   }
 `;
 
+const UserName = styled.span`
+  font-size: 0.75rem;
+  color: ${palette.blue9};
+  margin-right: 0.5rem;
+  user-select: none;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const InfoWrapper = styled.div`
+  position: relative;
+`;
+
 const Header = () => {
+  const [openSubMenu, setOpenSubMenu] = useState(false);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+
+  const onClickUserName = () => {
+    setOpenSubMenu(!openSubMenu);
+  };
+
   return (
     <Wrapper>
       <Navigation>
@@ -72,9 +98,17 @@ const Header = () => {
           </Link>
         </Title>
         <div>
-          <Link to="/login">
-            <Login>LOGIN</Login>
-          </Link>
+          {!isLoggedIn && (
+            <Link to="/login">
+              <Login>LOGIN</Login>
+            </Link>
+          )}
+          {isLoggedIn && (
+            <InfoWrapper>
+              <UserName onClick={onClickUserName}>jonggyuni@naver.com</UserName>
+              {openSubMenu && <SubMenu />}
+            </InfoWrapper>
+          )}
         </div>
       </Navigation>
     </Wrapper>

@@ -18,6 +18,7 @@ const App: React.FC = () => {
   const checkUserSession = async () => {
     try {
       await Auth.currentSession();
+      console.log('asd');
       const {
         attributes: { email },
       } = await Auth.currentAuthenticatedUser({ bypassCache: false });
