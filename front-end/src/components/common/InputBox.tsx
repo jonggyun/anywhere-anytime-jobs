@@ -48,7 +48,7 @@ interface InputBoxProps {
   placeholder: string;
   autoComplete: string;
   isValid: boolean;
-  alertMessage: string;
+  alertMessage?: string;
 }
 const InputBox: React.FC<InputBoxProps> = ({
   type,
@@ -77,3 +77,7 @@ const InputBox: React.FC<InputBoxProps> = ({
 };
 
 export default InputBox;
+
+InputBox.defaultProps = {
+  alertMessage: '',
+};
