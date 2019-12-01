@@ -55,7 +55,7 @@ const SubMenu = () => {
   };
   return (
     <Wrapper>
-      <CustomLink to="/">CREATE JOB</CustomLink>
+      <CustomLink to="/create">CREATE JOB</CustomLink>
       <CustomHr />
       <Content onClick={onClickLogOut}>LOG OUT</Content>
     </Wrapper>

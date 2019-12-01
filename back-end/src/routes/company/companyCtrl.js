@@ -9,6 +9,8 @@ const { companySchema } = require('../../schemas');
 AWS.config.update({
   region: config.AWS.REGION,
   endpoint: config.AWS.ENDPOINT,
+  accessKeyId: config.AWS.ACCESS_KEY_ID,
+  secretAccessKey: config.AWS.SECRET_ACCESS_KEY,
 });
 
 const params = {
@@ -22,7 +24,6 @@ exports.getAllCompanies = async (req, res) => {
     const { Items: items, Count: count } = await docClient
       .scan(params)
       .promise();
-
     res.status(200).json({
       jobs: items,
       count,
@@ -139,7 +140,10 @@ exports.getCompanyNews = async (req, res) => {
   try {
     const { companyName } = req.params;
 
-    console.log('encodeURI', encodeURI(companyName));
+    console.log(
+      'encodeURI',
+      `${config.NAVER.API_URL}${encodeURI(companyName)}&display=5`,
+    );
 
     const {
       data: { items },

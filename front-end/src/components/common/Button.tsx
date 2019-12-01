@@ -55,6 +55,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   return (
     <ButtonWrapper
+      type="button"
       widthSize={widthSize}
       disabled={disabled || isLoading}
       onClick={onClick}
