@@ -4,14 +4,15 @@ export interface RuleType {
 }
 
 export interface JobType {
-  anywhere: RuleType;
-  anytime: RuleType;
-  location: string;
-  description: string;
-  companyId: string;
-  homepage: string;
   company: string;
-  apply: string;
+  location?: string;
+  homepage?: string;
+  description?: string;
+  logo?: File;
+  anywhere?: RuleType;
+  anytime?: RuleType;
+  companyId?: string;
+  apply?: string;
 }
 
 export interface NewsType {
@@ -38,6 +39,10 @@ export const GET_ALL_JOBS_FAILURE = 'company/GET_ALL_JOBS_FAILURE';
 export const GET_JOB_REQUEST = 'company/GET_JOB_REQUEST';
 export const GET_JOB_SUCCESS = 'company/GET_JOB_SUCCESS';
 export const GET_JOB_FAILURE = 'company/GET_JOB_FAILURE';
+
+export const ADD_JOB_REQUEST = 'company/ADD_JOB_REQUEST';
+export const ADD_JOB_SUCCESS = 'company/ADD_JOB_SUCCESS';
+export const ADD_JOB_FAILURE = 'company/ADD_JOB_FAILURE';
 
 interface JobsAction {
   type:
@@ -67,9 +72,30 @@ export interface GetJobFailureAction {
   loading: boolean;
 }
 
+export interface AddJobRequestAction {
+  type: typeof ADD_JOB_REQUEST;
+  payload: JobType;
+  loading: boolean;
+}
+
+export interface AddJobSuccessAction {
+  type: typeof ADD_JOB_SUCCESS;
+  loading: boolean;
+}
+
+export interface AddJobFailureAction {
+  type: typeof ADD_JOB_FAILURE;
+  loading: boolean;
+}
+
 type JobAction =
   | GetJobRequestAction
   | GetJobSuccessAction
   | GetJobFailureAction;
 
-export type JobTypes = JobsAction | JobAction;
+type AddJobAction =
+  | AddJobRequestAction
+  | AddJobSuccessAction
+  | AddJobFailureAction;
+
+export type JobTypes = JobsAction | JobAction | AddJobAction;

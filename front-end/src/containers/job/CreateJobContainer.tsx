@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
 import useInputs from 'lib/hooks/useInputs';
 import useTextarea from 'lib/hooks/useTextarea';
 
 import CreateStep1 from 'components/job/CreateStep1';
 import CreateStep2 from 'components/job/CreateStep2';
 
+import { addJobRequest } from 'store/job/actions';
+
 interface CreateJobContainerProps {}
 const CreateJobContainer: React.FC<CreateJobContainerProps> = () => {
+  const dispatch = useDispatch();
   const [step, setStep] = useState(1);
   const [company, onChangeCompany] = useInputs('');
   const [location, onChangeLocation] = useInputs('');
   const [homepage, onChangeHomepage] = useInputs('');
   const [logo, setLogo] = useState();
+  const [previewLogo, setPreviewLogo] = useState();
   const [isWherePermission, setIsWherePermission] = useState(false);
   const [isTimePermission, setIsTimePermission] = useState(false);
   const [description, onChangeDescription] = useTextarea('');
@@ -26,7 +30,14 @@ const CreateJobContainer: React.FC<CreateJobContainerProps> = () => {
 
   const onChangeLogoImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
-    if (files) setLogo(files[0]);
+    if (files[0]) {
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setPreviewLogo(reader.result);
+      };
+      setLogo(files[0]);
+    }
   };
 
   const onChangeRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,24 +47,45 @@ const CreateJobContainer: React.FC<CreateJobContainerProps> = () => {
     if (name === 'istime') setIsTimePermission(!isTimePermission);
   };
 
-  const onSubmitJob = () => {
-    const params = {
+  const assembleParams = () => {
+    let params = {};
+
+    if (isWherePermission) {
+      params = {
+        ...params,
+        anywhere: {
+          permission: isWherePermission,
+          rule: anywhereRule,
+        },
+      };
+    }
+
+    if (isTimePermission) {
+      params = {
+        ...params,
+        anytime: {
+          permission: isTimePermission,
+          rule: anytimeRule,
+        },
+      };
+    }
+
+    return {
       company,
       location,
       homepage,
       description,
-      logo,
-      anywhere: isWherePermission && {
-        permission: isWherePermission,
-        rule: anywhereRule,
-      },
-      anytime: isTimePermission && {
-        permission: isTimePermission,
-        rule: anytimeRule,
-      },
+      ...params,
     };
+  };
 
-    console.log('params', params);
+  const onSubmitJob = () => {
+    dispatch(addJobRequest(assembleParams()));
+  };
+
+  const onRemovePreviewImage = () => {
+    setLogo(null);
+    setPreviewLogo(null);
   };
 
   return (
@@ -68,6 +100,8 @@ const CreateJobContainer: React.FC<CreateJobContainerProps> = () => {
           homepage={homepage}
           onChangeHomepage={onChangeHomepage}
           onChangeLogoImage={onChangeLogoImage}
+          previewLogo={previewLogo}
+          onRemovePreviewImage={onRemovePreviewImage}
         />
       )}
       {step === 2 && (

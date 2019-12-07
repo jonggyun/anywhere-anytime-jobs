@@ -6,6 +6,9 @@ import {
   GET_JOB_REQUEST,
   GET_JOB_SUCCESS,
   GET_JOB_FAILURE,
+  ADD_JOB_REQUEST,
+  ADD_JOB_SUCCESS,
+  ADD_JOB_FAILURE,
 } from './types';
 
 export const getAllJobsRequest = () => ({
@@ -33,4 +36,17 @@ export const getJobSuccess = (payload: JobType) => ({
 
 export const getJobFailure = () => ({
   type: GET_JOB_FAILURE,
+});
+
+export const addJobRequest = (payload: JobType) => ({
+  type: ADD_JOB_REQUEST,
+  payload,
+});
+
+export const addJobSuccess = () => ({
+  type: ADD_JOB_SUCCESS,
+});
+
+export const addJobFailure = () => ({
+  type: ADD_JOB_FAILURE,
 });

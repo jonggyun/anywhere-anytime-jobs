@@ -9,6 +9,10 @@ import {
   GET_JOB_REQUEST,
   GET_JOB_SUCCESS,
   GET_JOB_FAILURE,
+  ADD_JOB_REQUEST,
+  ADD_JOB_SUCCESS,
+  ADD_JOB_FAILURE,
+  AddJobRequestAction,
 } from './types';
 
 function* getJobs() {
@@ -60,6 +64,24 @@ function* getJobRequest() {
   yield takeLatest(GET_JOB_REQUEST, getJob);
 }
 
+function* addJob(action: AddJobRequestAction) {
+  try {
+    yield call(() => axios.post('/company', action.payload));
+
+    yield put({
+      type: ADD_JOB_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: ADD_JOB_FAILURE,
+    });
+  }
+}
+
+function* addJobRequest() {
+  yield takeLatest(ADD_JOB_REQUEST, addJob);
+}
+
 export default function* jobSaga() {
-  yield all([getAllJobsRequest(), getJobRequest()]);
+  yield all([getAllJobsRequest(), getJobRequest(), addJobRequest()]);
 }

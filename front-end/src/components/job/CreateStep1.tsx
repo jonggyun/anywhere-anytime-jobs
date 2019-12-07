@@ -64,6 +64,33 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
 `;
 
+const ImageWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid ${palette.gray4};
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  & > img {
+    margin-right: 1rem;
+  }
+`;
+
+const Image = styled.img`
+  width: 3.125rem;
+  height: 3.125rem;
+`;
+
+const RemoveIcon = styled.i`
+  position: absolute;
+  right: 1rem;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 interface CreateStep1Props {
   onClickButton: () => void;
   company: string;
@@ -73,6 +100,8 @@ interface CreateStep1Props {
   homepage: string;
   onChangeHomepage: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeLogoImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  previewLogo: string;
+  onRemovePreviewImage: () => void;
 }
 const CreateStep1: React.FC<CreateStep1Props> = ({
   onClickButton,
@@ -83,8 +112,11 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
   homepage,
   onChangeHomepage,
   onChangeLogoImage,
+  previewLogo,
+  onRemovePreviewImage,
 }) => {
   const { push } = useHistory();
+
   return (
     <Wrapper>
       <Item>
@@ -109,6 +141,16 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
           onChange={onChangeLogoImage}
           accept="image/*"
         />
+        {previewLogo && (
+          <ImageWrapper>
+            <Image src={previewLogo} alt="logo_image" />
+            <span>filename.jpg</span>
+            <RemoveIcon
+              className="fas fa-trash"
+              onClick={onRemovePreviewImage}
+            />
+          </ImageWrapper>
+        )}
       </Item>
       <Item>
         <Title>회사위치가 어디인가요?</Title>
@@ -123,7 +165,7 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
         />
       </Item>
       <Item>
-        <Title>홈페이지 주소를 적어주세요!</Title>
+        <Title isRequired>홈페이지 주소를 적어주세요!</Title>
         <InputBox
           type="text"
           name="homepage"
@@ -131,14 +173,18 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
           onChange={onChangeHomepage}
           placeholder="홈페이지 주소를 입력하세요."
           autoComplete="off"
-          isValid={true}
+          isValid={!!homepage}
         />
       </Item>
       <ButtonWrapper>
         <Button onClick={() => push('/')} disabled={false} widthSize="6.25rem">
           뒤로
         </Button>
-        <Button disabled={!company} widthSize="6.25rem" onClick={onClickButton}>
+        <Button
+          disabled={!company || !homepage}
+          widthSize="6.25rem"
+          onClick={onClickButton}
+        >
           다음
         </Button>
       </ButtonWrapper>
