@@ -79,14 +79,16 @@ function* addJob(action: AddJobRequestAction) {
       ...job,
     };
 
-    yield call(() =>
-      axios.post(`/company/${companyId}/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }),
-    );
-    yield call(() => axios.post('/company', params));
+    yield all([
+      call(() =>
+        axios.post(`/company/${companyId}/upload`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+      ),
+      call(() => axios.post('/company', params)),
+    ]);
 
     yield put({
       type: ADD_JOB_SUCCESS,
