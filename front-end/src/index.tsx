@@ -18,10 +18,10 @@ import * as serviceWorker from './serviceWorker';
 Amplify.configure({
   Auth: {
     mandatorySignIn: true,
-    region: config.cognito.REGION,
-    userPoolId: config.cognito.USER_POOL_ID,
-    identityPoolId: config.cognito.IDENTITY_POOL_ID,
-    userPoolWebClientId: config.cognito.CLIENT_ID,
+    region: config.AWS.REGION,
+    userPoolId: config.AWS.COGNITO.USER_POOL_ID,
+    identityPoolId: config.AWS.COGNITO.IDENTITY_POOL_ID,
+    userPoolWebClientId: config.AWS.COGNITO.CLIENT_ID,
   },
 });
 

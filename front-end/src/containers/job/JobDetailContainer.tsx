@@ -34,6 +34,7 @@ const JobDetailContainer = () => {
           location={item.location}
           anywhere={item.anywhere}
           anytime={item.anytime}
+          logo={item.logo}
           description={item.description}
           news={news}
         />

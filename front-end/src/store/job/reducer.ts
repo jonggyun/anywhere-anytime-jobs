@@ -31,6 +31,7 @@ const initialState: JobState = {
       homepage: '',
       company: '',
       apply: '',
+      logo: '',
     },
     news: [],
   },

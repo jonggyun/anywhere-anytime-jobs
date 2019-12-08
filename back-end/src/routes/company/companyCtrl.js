@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 const Joi = require('@hapi/joi');
-const uuidv1 = require('uuid/v1');
 const axios = require('axios');
 
 const config = require('../../constant');
@@ -8,13 +7,13 @@ const { companySchema } = require('../../schemas');
 
 AWS.config.update({
   region: config.AWS.REGION,
-  endpoint: config.AWS.ENDPOINT,
+  endpoint: config.AWS.DYNAMODB.ENDPOINT,
   accessKeyId: config.AWS.ACCESS_KEY_ID,
   secretAccessKey: config.AWS.SECRET_ACCESS_KEY,
 });
 
 const params = {
-  TableName: config.AWS.TABLE_NAME.COMPANY,
+  TableName: config.AWS.DYNAMODB.COMPNAY_TABLE,
 };
 
 const docClient = new AWS.DynamoDB.DocumentClient();
@@ -42,7 +41,6 @@ exports.addCompany = async (req, res) => {
       .put({
         ...params,
         Item: {
-          companyId: uuidv1(),
           ...validated,
         },
       })
@@ -54,6 +52,20 @@ exports.addCompany = async (req, res) => {
     console.log('error', error);
     res.status(400).json({
       error,
+    });
+  }
+};
+
+exports.addCompanyLogo = async (req, res) => {
+  try {
+    if (!req.file) throw new Error('file extension is not valid');
+    res.status(200).json({
+      message: 'success',
+    });
+  } catch (error) {
+    console.log('error', error);
+    res.status(400).json({
+      error: error.toString(),
     });
   }
 };
@@ -139,11 +151,6 @@ exports.removeCompany = async (req, res) => {
 exports.getCompanyNews = async (req, res) => {
   try {
     const { companyName } = req.params;
-
-    console.log(
-      'encodeURI',
-      `${config.NAVER.API_URL}${encodeURI(companyName)}&display=5`,
-    );
 
     const {
       data: { items },

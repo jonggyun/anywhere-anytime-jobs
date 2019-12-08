@@ -8,7 +8,7 @@ export interface JobType {
   location?: string;
   homepage?: string;
   description?: string;
-  logo?: File;
+  logo?: File | string;
   anywhere?: RuleType;
   anytime?: RuleType;
   companyId?: string;
@@ -74,7 +74,10 @@ export interface GetJobFailureAction {
 
 export interface AddJobRequestAction {
   type: typeof ADD_JOB_REQUEST;
-  payload: JobType;
+  payload: {
+    job: JobType;
+    logo: File;
+  };
   loading: boolean;
 }
 

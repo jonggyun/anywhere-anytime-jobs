@@ -10,6 +10,8 @@ import JobMap from 'components/job/JobMap';
 
 import { RuleType, NewsType } from 'store/job/types';
 
+import config from 'config';
+
 const Wrapper = styled.section`
   width: inherit;
 `;
@@ -65,6 +67,7 @@ interface JobDetailProps {
   location: string;
   anywhere: RuleType;
   anytime: RuleType;
+  logo: File | string;
   description: string;
   news: Array<NewsType>;
 }
@@ -75,12 +78,21 @@ const JobDetail: React.FC<JobDetailProps> = ({
   location,
   anywhere,
   anytime,
+  logo,
   description,
   news,
 }) => {
   return (
     <Wrapper>
-      <Image src="https://fakeimg.pl/100x100" />
+      {logo && (
+        <Image src={`${config.AWS.S3.BUCKET}${logo}`} alt="company_logo" />
+      )}
+      {!logo && (
+        <Image
+          src="https://fakeimg.pl/100x100/?text=NoImage&font=roboto"
+          alt="company_logo"
+        />
+      )}
       <Name>{company}</Name>
       <Info>
         {homepage && (

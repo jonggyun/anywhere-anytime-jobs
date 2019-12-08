@@ -38,7 +38,7 @@ export const getJobFailure = () => ({
   type: GET_JOB_FAILURE,
 });
 
-export const addJobRequest = (payload: JobType) => ({
+export const addJobRequest = (payload: { job: JobType; logo: File }) => ({
   type: ADD_JOB_REQUEST,
   payload,
 });

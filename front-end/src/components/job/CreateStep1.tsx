@@ -133,6 +133,18 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
         />
       </Item>
       <Item>
+        <Title isRequired>홈페이지 주소를 적어주세요!</Title>
+        <InputBox
+          type="text"
+          name="homepage"
+          value={homepage}
+          onChange={onChangeHomepage}
+          placeholder="홈페이지 주소를 입력하세요."
+          autoComplete="off"
+          isValid={!!homepage}
+        />
+      </Item>
+      <Item>
         <Title>로고가 있다면 등록해주세요!</Title>
         <UploadLabel htmlFor="logo_file">로고 등록</UploadLabel>
         <FileInput
@@ -153,7 +165,7 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
         )}
       </Item>
       <Item>
-        <Title>회사위치가 어디인가요?</Title>
+        <Title isRequired>회사위치가 어디인가요?</Title>
         <InputBox
           type="text"
           name="location"
@@ -161,19 +173,7 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
           onChange={onChangeLocation}
           placeholder="주소를 입력하세요."
           autoComplete="off"
-          isValid={true}
-        />
-      </Item>
-      <Item>
-        <Title isRequired>홈페이지 주소를 적어주세요!</Title>
-        <InputBox
-          type="text"
-          name="homepage"
-          value={homepage}
-          onChange={onChangeHomepage}
-          placeholder="홈페이지 주소를 입력하세요."
-          autoComplete="off"
-          isValid={!!homepage}
+          isValid={!!location}
         />
       </Item>
       <ButtonWrapper>
@@ -181,7 +181,7 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
           뒤로
         </Button>
         <Button
-          disabled={!company || !homepage}
+          disabled={!company || !homepage || !location}
           widthSize="6.25rem"
           onClick={onClickButton}
         >

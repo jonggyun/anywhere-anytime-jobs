@@ -28,14 +28,18 @@ const CreateJobContainer: React.FC<CreateJobContainerProps> = () => {
     if (step === 2) setStep(1);
   };
 
+  const setLogoPreview = (file: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewLogo(reader.result);
+    };
+  };
+
   const onChangeLogoImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files[0]) {
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-      reader.onloadend = () => {
-        setPreviewLogo(reader.result);
-      };
+      setLogoPreview(files[0]);
       setLogo(files[0]);
     }
   };
@@ -80,7 +84,12 @@ const CreateJobContainer: React.FC<CreateJobContainerProps> = () => {
   };
 
   const onSubmitJob = () => {
-    dispatch(addJobRequest(assembleParams()));
+    dispatch(
+      addJobRequest({
+        job: assembleParams(),
+        logo,
+      }),
+    );
   };
 
   const onRemovePreviewImage = () => {

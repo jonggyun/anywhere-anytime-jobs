@@ -1,5 +1,6 @@
 import { takeEvery, takeLatest, all, call, put } from 'redux-saga/effects';
 import axios from 'axios';
+import uuidv1 from 'uuid/v1';
 
 import {
   GetJobRequestAction,
@@ -66,7 +67,26 @@ function* getJobRequest() {
 
 function* addJob(action: AddJobRequestAction) {
   try {
-    yield call(() => axios.post('/company', action.payload));
+    const { job, logo } = action.payload;
+    const companyId = uuidv1();
+    const formData = new FormData();
+    const fileName = `${companyId}.${logo.type.split('/')[1]}`;
+    formData.append('logo', logo, fileName);
+
+    const params = {
+      companyId,
+      logo: fileName,
+      ...job,
+    };
+
+    yield call(() =>
+      axios.post(`/company/${companyId}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }),
+    );
+    yield call(() => axios.post('/company', params));
 
     yield put({
       type: ADD_JOB_SUCCESS,
