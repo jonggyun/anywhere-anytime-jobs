@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
 const indexRouter = require('./routes/index');
@@ -8,6 +9,7 @@ require('dotenv').config();
 
 const app = express();
 
+app.use(cors());
 app.set('port', process.env.PORT || 8000);
 app.use(morgan('dev'));
 app.use(express.static('uploads'));
