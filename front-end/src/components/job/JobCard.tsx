@@ -5,6 +5,8 @@ import palette from 'styles/palette';
 
 import Badge from 'components/common/Badge';
 
+import config from 'config';
+
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
@@ -27,6 +29,7 @@ const Image = styled.img`
   width: 4.6875rem;
   height: 4.6875rem;
   border-radius: 0.3125rem;
+  border: 1px solid ${palette.gray2};
 `;
 
 const Company = styled.h1`
@@ -70,6 +73,7 @@ interface JobCardProps {
     rule: string;
     permission: boolean;
   };
+  logo?: File | string;
 }
 const JobCard: React.FC<JobCardProps> = ({
   handleOnClick,
@@ -77,10 +81,16 @@ const JobCard: React.FC<JobCardProps> = ({
   location,
   anywhere,
   anytime,
+  logo,
 }) => {
   return (
     <Wrapper onClick={handleOnClick}>
-      <Image src="https://fakeimg.pl/75x75" alt="company_image" />
+      {logo && (
+        <Image src={`${config.AWS.S3.BUCKET}${logo}`} alt="company_logo" />
+      )}
+      {!logo && (
+        <Image src="https://fakeimg.pl/75x75/?text=No" alt="company_image" />
+      )}
       <Company>{company}</Company>
       <Location>
         {location && (

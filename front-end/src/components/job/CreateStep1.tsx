@@ -156,7 +156,6 @@ const CreateStep1: React.FC<CreateStep1Props> = ({
         {previewLogo && (
           <ImageWrapper>
             <Image src={previewLogo} alt="logo_image" />
-            <span>filename.jpg</span>
             <RemoveIcon
               className="fas fa-trash"
               onClick={onRemovePreviewImage}

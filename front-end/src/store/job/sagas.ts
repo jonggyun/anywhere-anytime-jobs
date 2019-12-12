@@ -2,6 +2,8 @@ import { takeEvery, takeLatest, all, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import uuidv1 from 'uuid/v1';
 
+import API from 'lib/api';
+
 import {
   GetJobRequestAction,
   GET_ALL_JOBS_REQUEST,
@@ -20,7 +22,7 @@ function* getJobs() {
   try {
     const {
       data: { jobs },
-    } = yield call(() => axios.get('/company'));
+    } = yield call(() => axios.get(`${API}/company`));
     yield put({
       type: GET_ALL_JOBS_SUCCESS,
       data: jobs,
@@ -41,11 +43,11 @@ function* getJob(action: GetJobRequestAction) {
   try {
     const {
       data: { item },
-    } = yield call(() => axios.get(`/company/${action.companyId}`));
+    } = yield call(() => axios.get(`${API}/company/${action.companyId}`));
 
     const {
       data: { news },
-    } = yield call(() => axios.get(`/company/news/${item.company}`));
+    } = yield call(() => axios.get(`${API}/company/news/${item.company}`));
 
     yield put({
       type: GET_JOB_SUCCESS,
@@ -81,13 +83,13 @@ function* addJob(action: AddJobRequestAction) {
 
     yield all([
       call(() =>
-        axios.post(`/company/${companyId}/upload`, formData, {
+        axios.post(`${API}/company/${companyId}/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         }),
       ),
-      call(() => axios.post('/company', params)),
+      call(() => axios.post(`${API}/company`, params)),
     ]);
 
     yield put({

@@ -20,6 +20,8 @@ const Image = styled.img`
   width: 6.25rem;
   height: 6.25rem;
   margin: 1.25rem 0;
+  border-radius: 0.3125rem;
+  border: 1px solid ${palette.gray2};
 `;
 
 const Name = styled.h1`

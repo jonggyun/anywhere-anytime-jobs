@@ -15,6 +15,7 @@ interface JobCardConatinerProps {
     rule: string;
     permission: boolean;
   };
+  logo?: File | string;
 }
 const JobCardConatiner: React.FC<JobCardConatinerProps> = ({
   companyId,
@@ -22,6 +23,7 @@ const JobCardConatiner: React.FC<JobCardConatinerProps> = ({
   location,
   anywhere,
   anytime,
+  logo,
 }) => {
   const { push } = useHistory();
   const handleOnClick = () => {
@@ -34,6 +36,7 @@ const JobCardConatiner: React.FC<JobCardConatinerProps> = ({
       location={location}
       anywhere={anywhere}
       anytime={anytime}
+      logo={logo}
     />
   );
 };

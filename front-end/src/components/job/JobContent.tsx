@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
+
 import { UnderLine } from 'styles/common';
 
 const Wrapper = styled.article`
@@ -35,7 +37,13 @@ const JobContent: React.FC<JobContentProps> = ({ type, title, content }) => {
     <Wrapper>
       <Title>{title}</Title>
       <TitleBorder type={type} />
-      <Content>{content ? content : '입력된 내용이 없습니다.😢'}</Content>
+      <Content>
+        {content ? (
+          <ReactMarkdown source={content} />
+        ) : (
+          '입력된 내용이 없습니다.😢'
+        )}
+      </Content>
     </Wrapper>
   );
 };
