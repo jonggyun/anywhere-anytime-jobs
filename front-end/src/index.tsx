@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
@@ -9,7 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import Amplify from 'aws-amplify';
 import config from './config';
 
-import reducers, { rootSaga } from './store';
+import reducers, { rootSaga, history } from './store';
 
 import './index.css';
 import App from './App';
@@ -39,9 +40,9 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById('root'),
 );

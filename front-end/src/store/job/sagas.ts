@@ -2,6 +2,7 @@ import { takeEvery, takeLatest, all, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 import uuidv1 from 'uuid/v1';
 
+import { history } from 'store';
 import API from 'lib/api';
 
 import {
@@ -71,31 +72,31 @@ function* addJob(action: AddJobRequestAction) {
   try {
     const { job, logo } = action.payload;
     const companyId = uuidv1();
-    const formData = new FormData();
-    const fileName = `${companyId}.${logo.type.split('/')[1]}`;
-    formData.append('logo', logo, fileName);
+    let params = { companyId, ...job };
 
-    const params = {
-      companyId,
-      logo: fileName,
-      ...job,
-    };
+    if (logo) {
+      const formData = new FormData();
+      const fileName = `${companyId}.${logo.type.split('/')[1]}`;
+      formData.append('logo', logo, fileName);
+      params = { ...params, logo: fileName };
 
-    yield all([
-      call(() =>
+      yield call(() =>
         axios.post(`${API}/company/${companyId}/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         }),
-      ),
-      call(() => axios.post(`${API}/company`, params)),
-    ]);
+      );
+    }
+
+    yield call(() => axios.post(`${API}/company`, params));
 
     yield put({
       type: ADD_JOB_SUCCESS,
     });
+    yield call(() => history.push('/'));
   } catch (error) {
+    console.log('error', error);
     yield put({
       type: ADD_JOB_FAILURE,
     });
