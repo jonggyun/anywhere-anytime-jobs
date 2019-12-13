@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from 'styles/palette';
@@ -45,13 +44,9 @@ const CustomHr = styled.hr`
 
 const SubMenu = () => {
   const dispatch = useDispatch();
-  const { push } = useHistory();
 
   const onClickLogOut = () => {
     dispatch(logOutRequest());
-    setTimeout(() => {
-      push('/login');
-    }, 1000);
   };
   return (
     <Wrapper>

@@ -1,5 +1,6 @@
-import { takeLatest, all, put } from 'redux-saga/effects';
+import { takeLatest, all, put, call } from 'redux-saga/effects';
 import { Auth } from 'aws-amplify';
+import { history } from 'store';
 
 import {
   LoginRequestAction,
@@ -54,6 +55,7 @@ function* logOut() {
   try {
     yield Auth.signOut();
     yield put({ type: LOGOUT_SUCCESS });
+    yield call(() => history.push('/login'));
   } catch (error) {
     yield put({ type: LOGOUT_FAILURE });
   }
