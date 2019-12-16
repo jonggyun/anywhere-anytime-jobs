@@ -17,6 +17,10 @@ import {
   ADD_JOB_SUCCESS,
   ADD_JOB_FAILURE,
   AddJobRequestAction,
+  UPDATE_JOB_REQUEST,
+  UPDATE_JOB_SUCCESS,
+  UPDATE_JOB_FAILURE,
+  UpdateJobRequestAction,
 } from './types';
 
 function* getJobs() {
@@ -107,6 +111,30 @@ function* addJobRequest() {
   yield takeLatest(ADD_JOB_REQUEST, addJob);
 }
 
+function* updateJob(action: UpdateJobRequestAction) {
+  try {
+    yield call(() =>
+      axios.put(`${API}/company/${action.payload.companyId}`, action.payload),
+    );
+    yield put({
+      type: UPDATE_JOB_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: UPDATE_JOB_FAILURE,
+    });
+  }
+}
+
+function* updateJobRequest() {
+  yield takeLatest(UPDATE_JOB_REQUEST, updateJob);
+}
+
 export default function* jobSaga() {
-  yield all([getAllJobsRequest(), getJobRequest(), addJobRequest()]);
+  yield all([
+    getAllJobsRequest(),
+    getJobRequest(),
+    addJobRequest(),
+    updateJobRequest(),
+  ]);
 }

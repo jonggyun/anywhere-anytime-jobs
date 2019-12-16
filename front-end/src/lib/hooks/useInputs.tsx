@@ -5,6 +5,5 @@ export default function useInputs(value: string) {
   const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   }, []);
-
   return [input, onChange] as [string, typeof onChange];
 }

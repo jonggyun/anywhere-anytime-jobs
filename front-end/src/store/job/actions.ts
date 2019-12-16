@@ -9,6 +9,9 @@ import {
   ADD_JOB_REQUEST,
   ADD_JOB_SUCCESS,
   ADD_JOB_FAILURE,
+  UPDATE_JOB_REQUEST,
+  UPDATE_JOB_SUCCESS,
+  UPDATE_JOB_FAILURE,
 } from './types';
 
 export const getAllJobsRequest = () => ({
@@ -49,4 +52,17 @@ export const addJobSuccess = () => ({
 
 export const addJobFailure = () => ({
   type: ADD_JOB_FAILURE,
+});
+
+export const updateJobRequest = (payload: JobType) => ({
+  type: UPDATE_JOB_REQUEST,
+  payload,
+});
+
+export const updateJobSuccess = () => ({
+  type: UPDATE_JOB_SUCCESS,
+});
+
+export const updateJobFailure = () => ({
+  type: UPDATE_JOB_FAILURE,
 });

@@ -11,6 +11,9 @@ import {
   ADD_JOB_REQUEST,
   ADD_JOB_SUCCESS,
   ADD_JOB_FAILURE,
+  UPDATE_JOB_REQUEST,
+  UPDATE_JOB_SUCCESS,
+  UPDATE_JOB_FAILURE,
 } from './types';
 
 const initialState: JobState = {
@@ -64,6 +67,15 @@ const reducer = (state = initialState, action: JobTypes) =>
         draft.loading = false;
         break;
       case ADD_JOB_FAILURE:
+        draft.loading = false;
+        break;
+      case UPDATE_JOB_REQUEST:
+        draft.loading = true;
+        break;
+      case UPDATE_JOB_SUCCESS:
+        draft.loading = false;
+        break;
+      case UPDATE_JOB_FAILURE:
         draft.loading = false;
         break;
       default:

@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import palette from 'styles/palette';
 
 import Badge from 'components/common/Badge';
+import MenuButton from 'components/common/MenuButton';
 import JobContent from 'components/job/JobContent';
 import JobNews from 'components/job/JobNews';
 import JobMap from 'components/job/JobMap';
@@ -14,6 +16,12 @@ import config from 'config';
 
 const Wrapper = styled.section`
   width: inherit;
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Image = styled.img`
@@ -64,6 +72,7 @@ const SideInfo = styled.article`
 
 interface JobDetailProps {
   onClickHomePage: (homepage: string) => void;
+  companyId: string;
   company: string;
   homepage: string;
   location: string;
@@ -72,9 +81,11 @@ interface JobDetailProps {
   logo: File | string;
   description: string;
   news: Array<NewsType>;
+  onClickEditButton: () => void;
 }
 const JobDetail: React.FC<JobDetailProps> = ({
   onClickHomePage,
+  companyId,
   company,
   homepage,
   location,
@@ -83,18 +94,24 @@ const JobDetail: React.FC<JobDetailProps> = ({
   logo,
   description,
   news,
+  onClickEditButton,
 }) => {
   return (
     <Wrapper>
-      {logo && (
-        <Image src={`${config.AWS.S3.BUCKET}${logo}`} alt="company_logo" />
-      )}
-      {!logo && (
-        <Image
-          src="https://fakeimg.pl/100x100/?text=NoImage&font=roboto"
-          alt="company_logo"
-        />
-      )}
+      <ImageWrapper>
+        {logo && (
+          <Image src={`${config.AWS.S3.BUCKET}${logo}`} alt="company_logo" />
+        )}
+        {!logo && (
+          <Image
+            src="https://fakeimg.pl/100x100/?text=NoImage&font=roboto"
+            alt="company_logo"
+          />
+        )}
+        <MenuButton theme="blue" onClick={onClickEditButton}>
+          Edit JOB
+        </MenuButton>
+      </ImageWrapper>
       <Name>{company}</Name>
       <Info>
         {homepage && (

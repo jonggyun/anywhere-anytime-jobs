@@ -13,6 +13,7 @@ const JobCardsContainer: React.FC<JobCardsContainerProps> = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { list } = useSelector((state: RootState) => state.job);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     setIsLoading(true);
@@ -20,10 +21,11 @@ const JobCardsContainer: React.FC<JobCardsContainerProps> = () => {
     setIsLoading(false);
     return () => {};
   }, [dispatch]);
+
   return (
     <React.Fragment>
       {isLoading && <JobCardsSkeleton />}
-      {!isLoading && <JobsCards jobs={list} />}
+      {!isLoading && <JobsCards jobs={list} isLoggedIn={isLoggedIn} />}
     </React.Fragment>
   );
 };

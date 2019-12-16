@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-// import { useHistory } from 'react-router';
 import { Route } from 'react-router-dom';
 
 import MainPage from 'pages/MainPage';
@@ -14,7 +13,6 @@ import { Auth } from 'aws-amplify';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  // const { push } = useHistory();
 
   const checkUserSession = async () => {
     try {

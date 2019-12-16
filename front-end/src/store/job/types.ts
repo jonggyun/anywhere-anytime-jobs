@@ -44,6 +44,10 @@ export const ADD_JOB_REQUEST = 'company/ADD_JOB_REQUEST';
 export const ADD_JOB_SUCCESS = 'company/ADD_JOB_SUCCESS';
 export const ADD_JOB_FAILURE = 'company/ADD_JOB_FAILURE';
 
+export const UPDATE_JOB_REQUEST = 'company/UPDATE_JOB_REQUEST';
+export const UPDATE_JOB_SUCCESS = 'company/UPDATE_JOB_SUCCESS';
+export const UPDATE_JOB_FAILURE = 'company/UPDATE_JOB_FAILURE';
+
 interface JobsAction {
   type:
     | typeof GET_ALL_JOBS_REQUEST
@@ -91,6 +95,22 @@ export interface AddJobFailureAction {
   loading: boolean;
 }
 
+export interface UpdateJobRequestAction {
+  type: typeof UPDATE_JOB_REQUEST;
+  payload: JobType;
+  loading: boolean;
+}
+
+export interface UpdateJobSuccessAction {
+  type: typeof UPDATE_JOB_SUCCESS;
+  loading: boolean;
+}
+
+export interface UpdateJobFailureAction {
+  type: typeof UPDATE_JOB_FAILURE;
+  loading: boolean;
+}
+
 type JobAction =
   | GetJobRequestAction
   | GetJobSuccessAction
@@ -101,4 +121,9 @@ type AddJobAction =
   | AddJobSuccessAction
   | AddJobFailureAction;
 
-export type JobTypes = JobsAction | JobAction | AddJobAction;
+type UpdateJobAction =
+  | UpdateJobRequestAction
+  | UpdateJobSuccessAction
+  | UpdateJobFailureAction;
+
+export type JobTypes = JobsAction | JobAction | AddJobAction | UpdateJobAction;

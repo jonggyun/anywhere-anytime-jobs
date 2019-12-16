@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -8,7 +9,9 @@ import { RootState } from 'store';
 import common from 'styles/common';
 import palette from 'styles/palette';
 
-import SubMenu from 'components/common/SubMenu';
+import { logOutRequest } from 'store/auth/actions';
+
+import MenuButton from 'components/common/MenuButton';
 
 const Wrapper = styled.section`
   width: 100vw;
@@ -48,45 +51,12 @@ const Title = styled.span`
   }
 `;
 
-const Login = styled.span`
-  padding: 0.5rem 1.75rem;
-  box-sizing: content-box;
-  border: 1px solid ${palette.gray3};
-  border-radius: 1.25rem;
-  color: ${palette.blue9};
-  font-size: 0.75rem;
-  :link,
-  :active,
-  :visited {
-    color: ${palette.blue9};
-  }
-  :hover {
-    background-color: ${palette.blue9};
-    color: #fff;
-    border: 1px solid ${palette.blue9};
-  }
-`;
-
-const UserName = styled.span`
-  font-size: 0.75rem;
-  color: ${palette.blue9};
-  margin-right: 0.5rem;
-  user-select: none;
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-const InfoWrapper = styled.div`
-  position: relative;
-`;
-
 const Header = () => {
-  const [openSubMenu, setOpenSubMenu] = useState(false);
+  const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
-  const onClickUserName = () => {
-    setOpenSubMenu(!openSubMenu);
+  const onClickLogOut = () => {
+    dispatch(logOutRequest());
   };
 
   return (
@@ -100,14 +70,11 @@ const Header = () => {
         <div>
           {!isLoggedIn && (
             <Link to="/login">
-              <Login>LOGIN</Login>
+              <MenuButton>LOG IN</MenuButton>
             </Link>
           )}
           {isLoggedIn && (
-            <InfoWrapper>
-              <UserName onClick={onClickUserName}>jonggyuni@naver.com</UserName>
-              {openSubMenu && <SubMenu />}
-            </InfoWrapper>
+            <MenuButton onClick={onClickLogOut}>LOG OUT</MenuButton>
           )}
         </div>
       </Navigation>

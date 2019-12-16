@@ -1,7 +1,8 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Button from 'components/common/Button';
+import TextAreaBox from 'components/common/TextAreaBox';
 
 const Wrapper = styled.section`
   width: 50%;
@@ -16,17 +17,6 @@ const Title = styled.span`
   font-weight: 900;
   display: block;
   margin-right: 1rem;
-`;
-
-const boxFadeIn = keyframes`
-  0% {
-    opacity: 0;
-    height: 1rem;
-  }
-  100% {
-    opacity: 1;
-    height: 13.75rem;
-  }
 `;
 
 const textArea = css`
@@ -46,40 +36,6 @@ const textArea = css`
 const TextArea = styled.textarea`
   ${textArea}
   height: 13.75rem;
-`;
-
-interface TextAreaProps {
-  isDisplay?: boolean;
-}
-const FadeTextArea = styled.textarea<TextAreaProps>`
-  ${textArea}
-  height: 1rem;
-
-  ${({ isDisplay }) =>
-    isDisplay
-      ? css`
-          visibility: visible;
-          height: 13.75rem;
-          animation: ${boxFadeIn} 0.3s ease-in 1;
-        `
-      : css`
-          visibility: hidden;
-        `};
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-`;
-
-const RadioLabel = styled.label`
-  margin-right: 0.5rem;
-  & > span {
-    font-weight: 900;
-    margin-left: 0.5rem;
-  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -124,61 +80,25 @@ const CreateStep2: React.FC<CreateStep2Props> = ({
         />
       </Item>
       <Item>
-        <TitleWrapper>
-          <Title>원격 근무를 지원하나요?</Title>
-          <RadioLabel>
-            <input
-              type="radio"
-              name="iswhere"
-              checked={isWherePermission}
-              onChange={onChangeRadioButton}
-            />
-            <span>YES</span>
-          </RadioLabel>
-          <RadioLabel>
-            <input
-              type="radio"
-              name="iswhere"
-              checked={!isWherePermission}
-              onChange={onChangeRadioButton}
-            />
-            <span>NO</span>
-          </RadioLabel>
-        </TitleWrapper>
-        <FadeTextArea
-          isDisplay={isWherePermission}
-          placeholder="어떤 규칙을 갖고 있나요?"
+        <TextAreaBox
+          title="원격 근무를 지원하나요?"
+          name="iswhere"
           value={anywhereRule}
-          onChange={onChangeAnywhereRule}
+          placeholder="어떤 규칙을 갖고 있나요?"
+          checked={isWherePermission}
+          onChangeRadioButton={onChangeRadioButton}
+          onChangeTextArea={onChangeAnywhereRule}
         />
       </Item>
       <Item>
-        <TitleWrapper>
-          <Title>자율 출퇴근을 지원하나요?</Title>
-          <RadioLabel>
-            <input
-              type="radio"
-              name="istime"
-              checked={isTimePermission}
-              onChange={onChangeRadioButton}
-            />
-            <span>YES</span>
-          </RadioLabel>
-          <RadioLabel>
-            <input
-              type="radio"
-              name="istime"
-              checked={!isTimePermission}
-              onChange={onChangeRadioButton}
-            />
-            <span>NO</span>
-          </RadioLabel>
-        </TitleWrapper>
-        <FadeTextArea
-          isDisplay={isTimePermission}
-          placeholder="어떤 규칙을 갖고 있나요?"
+        <TextAreaBox
+          title="자율 출퇴근을 지원하나요?"
+          name="istime"
           value={anytimeRule}
-          onChange={onChangeAnytimeRule}
+          placeholder="어떤 규칙을 갖고 있나요?"
+          checked={isTimePermission}
+          onChangeRadioButton={onChangeRadioButton}
+          onChangeTextArea={onChangeAnytimeRule}
         />
       </Item>
       <ButtonWrapper>
