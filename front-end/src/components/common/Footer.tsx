@@ -11,6 +11,7 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 3rem;
 `;
 
 const Title = styled.h1`

@@ -67,6 +67,7 @@ const MainInfo = styled.article`
 const SideInfo = styled.article`
   width: 18.75rem;
   margin-left: 1rem;
+  overflow: hidden;
 `;
 
 interface JobDetailProps {
