@@ -74,11 +74,61 @@ const Title = styled.span<TitleProps>`
   }
 `;
 
+const ProgressbarWrapper = styled.div`
+  width: 100%;
+  height: 0.5rem;
+  background-color: ${palette.gray0};
+  position: fixed;
+  align-self: flex-end;
+`;
+
+interface ProgressbarProps {
+  barWidth: number;
+}
+const Progressbar = styled.div.attrs(({ barWidth }: { barWidth: number }) => ({
+  style: {
+    width: `${barWidth}%`,
+    borderRadius: barWidth === 100 ? '0' : '5px',
+  },
+}))<ProgressbarProps>`
+  background-color: ${palette.blue9};
+  height: 0.5rem;
+`;
+
 const Header = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
   const [isOverImage, setIsOverImage] = useState(false);
+  const [barWidth, setBarWidth] = useState(0);
+
+  const isMainPage = useMemo(() => pathname === '/', [pathname]);
+  const isDefaultHeader = useMemo(() => isOverImage || !isMainPage, [
+    isMainPage,
+    isOverImage,
+  ]);
+
+  const onMainImage = () => {
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+
+    scrollTop > 550 ? setIsOverImage(true) : setIsOverImage(false);
+  };
+
+  const onProgressBar = useCallback(() => {
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+    const currentHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = (scrollTop / currentHeight) * 100;
+
+    if (isMainPage) {
+      setBarWidth(scrolled);
+    }
+  }, [isMainPage]);
 
   const onScroll = useCallback(() => {
     let throttling;
@@ -86,24 +136,15 @@ const Header = () => {
     if (!throttling) {
       throttling = setTimeout(() => {
         throttling = false;
-        const scrollTop =
-          (document.documentElement && document.documentElement.scrollTop) ||
-          document.body.scrollTop;
-
-        scrollTop > 550 ? setIsOverImage(true) : setIsOverImage(false);
-      }, 300);
+        onMainImage();
+      }, 500);
     }
-  }, []);
+    onProgressBar();
+  }, [onProgressBar]);
 
   const onClickLogOut = () => {
     dispatch(logOutRequest());
   };
-
-  const isMainPage = useMemo(() => pathname === '/', [pathname]);
-  const isDefaultHeader = useMemo(() => isOverImage || !isMainPage, [
-    isMainPage,
-    isOverImage,
-  ]);
 
   useEffect(() => {
     if (isMainPage) {
@@ -115,7 +156,7 @@ const Header = () => {
         window.removeEventListener('scroll', onScroll);
       }
     };
-  }, [onScroll]);
+  }, [onScroll, isMainPage]);
 
   return (
     <Wrapper defaultTheme={isDefaultHeader}>
@@ -143,6 +184,11 @@ const Header = () => {
           )}
         </div>
       </Navigation>
+      {isMainPage && isDefaultHeader && (
+        <ProgressbarWrapper>
+          <Progressbar barWidth={barWidth} />
+        </ProgressbarWrapper>
+      )}
     </Wrapper>
   );
 };
