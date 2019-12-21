@@ -24,7 +24,7 @@ const LoginContainer: React.FC<LoginContainerProps> = () => {
 
   useEffect(() => {
     if (isLoggedIn) push('/');
-  }, [isLoggedIn]);
+  }, [isLoggedIn, push]);
 
   return (
     <Login

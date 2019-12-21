@@ -35,6 +35,23 @@ const blue = css`
   }
 `;
 
+const white = css`
+  background-color: #fff;
+  border: 1px solid #fff;
+  color: ${palette.blue9};
+  :link,
+  :active,
+  :visited {
+    color: #fff;
+  }
+  :hover {
+    cursor: pointer;
+    background-color: ${palette.blue6};
+    color: #fff;
+    border: 1px solid ${palette.blue6};
+  }
+`;
+
 const ButtonWrapper = styled.div`
   font-weight: 900;
 `;
@@ -47,7 +64,8 @@ const Button = styled.span<ButtonProps>`
   box-sizing: content-box;
   border-radius: 1.25rem;
   font-size: 0.75rem;
-  ${({ theme }) => (theme === 'blue' ? blue : defaultTheme)};
+  ${({ theme }) =>
+    theme === 'blue' ? blue : theme === 'white' ? white : defaultTheme};
 `;
 
 interface MenuButtonProps {

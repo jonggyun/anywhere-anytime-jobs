@@ -5,8 +5,6 @@ import InputBox from 'components/common/InputBox';
 import Button from 'components/common/Button';
 import TextAreaBox from 'components/common/TextAreaBox';
 
-import { RuleType } from 'store/job/types';
-
 const Wrapper = styled.section`
   width: 50%;
 `;

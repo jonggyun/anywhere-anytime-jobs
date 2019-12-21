@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import { useLocation } from 'react-router';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -13,7 +14,10 @@ import { logOutRequest } from 'store/auth/actions';
 
 import MenuButton from 'components/common/MenuButton';
 
-const Wrapper = styled.section`
+interface WrapperProps {
+  defaultTheme: boolean;
+}
+const Wrapper = styled.section<WrapperProps>`
   width: 100vw;
   height: ${common.headerHeight};
   position: fixed;
@@ -22,8 +26,12 @@ const Wrapper = styled.section`
   color: #fff;
   font-weight: 900;
   z-index: 1;
-  background-color: #fff;
-  border-bottom: 1px solid ${palette.gray2};
+  ${({ defaultTheme }) =>
+    defaultTheme &&
+    css`
+      background-color: #fff;
+      border-bottom: 1px solid ${palette.gray2};
+    `};
 `;
 
 const Navigation = styled.nav`
@@ -33,15 +41,18 @@ const Navigation = styled.nav`
   justify-content: space-between;
 `;
 
-const Title = styled.span`
-  color: ${palette.blue9};
+interface TitleProps {
+  defaultTheme: boolean;
+}
+const Title = styled.span<TitleProps>`
+  color: ${({ defaultTheme }) => (defaultTheme ? palette.blue9 : '#fff')};
   font-size: 1.25rem;
   font-weight: 700;
 
   a:link,
   a:active,
   a:visited {
-    color: ${palette.blue9};
+    color: ${({ defaultTheme }) => (defaultTheme ? palette.blue9 : '#fff')};
     text-decoration: none;
     letter-spacing: -0.5px;
   }
@@ -53,16 +64,51 @@ const Title = styled.span`
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const [isOverImage, setIsOverImage] = useState(false);
+
+  const onScroll = useCallback(() => {
+    let throttling;
+
+    if (!throttling) {
+      throttling = setTimeout(() => {
+        throttling = false;
+        const scrollTop =
+          (document.documentElement && document.documentElement.scrollTop) ||
+          document.body.scrollTop;
+
+        scrollTop > 550 ? setIsOverImage(true) : setIsOverImage(false);
+      }, 300);
+    }
+  }, []);
 
   const onClickLogOut = () => {
     dispatch(logOutRequest());
   };
 
+  const isMainPage = useMemo(() => pathname === '/', [pathname]);
+  const isDefaultHeader = useMemo(() => isOverImage || !isMainPage, [
+    isMainPage,
+    isOverImage,
+  ]);
+
+  useEffect(() => {
+    if (isMainPage) {
+      window.addEventListener('scroll', onScroll);
+    }
+
+    return () => {
+      if (isMainPage) {
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+  }, [onScroll]);
+
   return (
-    <Wrapper>
+    <Wrapper defaultTheme={isDefaultHeader}>
       <Navigation>
-        <Title>
+        <Title defaultTheme={isDefaultHeader}>
           <Link to="/">
             <span>Anywhere Anytime Jobs</span>
           </Link>
@@ -70,11 +116,18 @@ const Header = () => {
         <div>
           {!isLoggedIn && (
             <Link to="/login">
-              <MenuButton>LOG IN</MenuButton>
+              <MenuButton theme={isDefaultHeader ? 'blue' : 'white'}>
+                LOG IN
+              </MenuButton>
             </Link>
           )}
           {isLoggedIn && (
-            <MenuButton onClick={onClickLogOut}>LOG OUT</MenuButton>
+            <MenuButton
+              theme={isDefaultHeader ? 'blue' : 'white'}
+              onClick={onClickLogOut}
+            >
+              LOG OUT
+            </MenuButton>
           )}
         </div>
       </Navigation>

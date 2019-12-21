@@ -50,6 +50,7 @@ export const Skeleton = styled.div<SkeletonProps>`
 
 const common = {
   headerHeight: '6.25rem',
+  imageHeight: '37.5rem',
 };
 
 export default common;

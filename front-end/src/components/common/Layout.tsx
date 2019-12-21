@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router';
 import styled from 'styled-components';
 
 import Header from './Header';
@@ -11,9 +12,12 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-const Content = styled.section`
+interface ContentProps {
+  isMain: boolean;
+}
+const Content = styled.section<ContentProps>`
   position: relative;
-  padding-top: ${common.headerHeight};
+  padding-top: ${({ isMain }) => (isMain ? '0' : common.headerHeight)};
   box-sizing: border-box;
   width: 100%;
   display: flex;
@@ -23,10 +27,12 @@ const Content = styled.section`
 `;
 
 const Layout: React.FC = ({ children }) => {
+  const { pathname } = useLocation();
+
   return (
     <Wrapper>
       <Header />
-      <Content>{children}</Content>
+      <Content isMain={pathname === '/' ? true : false}>{children}</Content>
     </Wrapper>
   );
 };

@@ -8,6 +8,8 @@ import JobDetailContainer from 'containers/job/JobDetailContainer';
 const Wrapper = styled.section`
   width: 68.75rem;
   padding: 0.625rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 interface JobDetailPageProps {}

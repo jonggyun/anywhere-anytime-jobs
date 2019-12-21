@@ -21,7 +21,6 @@ const App: React.FC = () => {
         attributes: { email },
       } = await Auth.currentAuthenticatedUser({ bypassCache: false });
       dispatch(meRequest({ email }));
-      // push('/');
     } catch (error) {
       console.log('error', error);
     }
@@ -29,7 +28,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     checkUserSession();
-  }, []);
+  });
   return (
     <>
       <Route exact path="/" component={MainPage} />
