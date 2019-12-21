@@ -22,6 +22,7 @@ const Input = styled.input<InputProps>`
   padding: 0.625rem;
   box-sizing: border-box;
   user-select: none;
+  border: 1px solid ${palette.gray2};
 
   ${({ isValid }) =>
     !isValid &&

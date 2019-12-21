@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from 'styles/palette';
+import { responsiveSize } from 'styles/common';
 
 const defaultTheme = css`
   border: 1px solid ${palette.gray3};
@@ -66,6 +67,11 @@ const Button = styled.span<ButtonProps>`
   font-size: 0.75rem;
   ${({ theme }) =>
     theme === 'blue' ? blue : theme === 'white' ? white : defaultTheme};
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    padding: 0.5rem 1rem;
+    font-size: 0.625rem;
+  }
 `;
 
 interface MenuButtonProps {

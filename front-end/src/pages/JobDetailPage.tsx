@@ -5,6 +5,7 @@ import Layout from 'components/common/Layout';
 import Footer from 'components/common/Footer';
 
 import JobDetailContainer from 'containers/job/JobDetailContainer';
+import { responsiveSize } from 'styles/common';
 
 const Wrapper = styled.section`
   width: 100%;
@@ -17,6 +18,10 @@ const Wrapper = styled.section`
 const DetailWrapper = styled.div`
   width: 68.75rem;
   display: flex;
+
+  @media screen and (max-width: ${responsiveSize.desktop.lg}) {
+    width: 95%;
+  }
 `;
 
 interface JobDetailPageProps {}

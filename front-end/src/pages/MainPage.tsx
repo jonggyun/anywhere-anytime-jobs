@@ -5,11 +5,7 @@ import Layout from 'components/common/Layout';
 
 import JobCardsContainer from 'containers/job/JobCardsContainer';
 
-const Wrapper = styled.section`
-  /* width: 68.75rem; */
-  /* padding: 2rem 0.5rem;
-  box-sizing: border-box; */
-`;
+const Wrapper = styled.section``;
 
 const Main: React.FC = () => {
   return (

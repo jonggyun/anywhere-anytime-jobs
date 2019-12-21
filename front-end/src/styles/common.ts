@@ -2,12 +2,24 @@ import styled, { css } from 'styled-components';
 
 import palette from 'styles/palette';
 
+export const responsiveSize = {
+  desktop: {
+    lg: '1120px',
+    md: '800px',
+    sm: '640px',
+  },
+};
+
 export const CenterAlign = styled.section`
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    width: 95%;
+  }
 `;
 
 export const UnderLine = styled.span`
@@ -50,6 +62,7 @@ export const Skeleton = styled.div<SkeletonProps>`
 
 const common = {
   headerHeight: '6.25rem',
+  mobileHeaderHeight: '3.5rem',
   imageHeight: '37.5rem',
 };
 

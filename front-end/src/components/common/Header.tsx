@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 import { RootState } from 'store';
 
-import common from 'styles/common';
+import common, { responsiveSize } from 'styles/common';
 import palette from 'styles/palette';
 
 import { logOutRequest } from 'store/auth/actions';
@@ -32,6 +32,10 @@ const Wrapper = styled.section<WrapperProps>`
       background-color: #fff;
       border-bottom: 1px solid ${palette.gray2};
     `};
+
+  @media screen and (max-width: ${responsiveSize.desktop.lg}) {
+    height: ${common.mobileHeaderHeight};
+  }
 `;
 
 const Navigation = styled.nav`
@@ -39,6 +43,10 @@ const Navigation = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: ${responsiveSize.desktop.lg}) {
+    width: 90%;
+  }
 `;
 
 interface TitleProps {
@@ -59,6 +67,10 @@ const Title = styled.span<TitleProps>`
   a:hover {
     cursor: pointer;
     letter-spacing: -0.5px;
+  }
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 1rem;
   }
 `;
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SignUp from 'components/auth/SingUp';
 import useInputs from 'lib/hooks/useInputs';
 import { RootState } from 'store';
-
 import { signUpReqeust } from 'store/auth/actions';
+
+import SignUp from 'components/auth/SingUp';
 
 interface SignUpContainerProps {}
 const SignUpContainer: React.FC<SignUpContainerProps> = () => {

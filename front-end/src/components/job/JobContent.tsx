@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 
-import { UnderLine } from 'styles/common';
+import { UnderLine, responsiveSize } from 'styles/common';
 
 const Wrapper = styled.article`
   margin: 1rem 0;
@@ -12,10 +12,18 @@ const Wrapper = styled.article`
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 1.25rem;
+  }
 `;
 
 const Content = styled.span`
   font-size: 0.875rem;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 0.75rem;
+  }
 `;
 
 interface TitleBorderProps {

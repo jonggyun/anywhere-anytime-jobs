@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { UnderLine } from 'styles/common';
+import { UnderLine, responsiveSize } from 'styles/common';
 import palette from 'styles/palette';
 
 import Button from 'components/common/Button';
@@ -15,6 +15,10 @@ const LogInWrapper = styled.section`
   width: 23.125rem;
   background-color: #fff;
   border: 1px solid ${palette.gray2};
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    width: 95%;
+  }
 `;
 
 const Title = styled.h1`

@@ -5,6 +5,8 @@ import palette from 'styles/palette';
 
 import Badge from 'components/common/Badge';
 
+import { responsiveSize } from 'styles/common';
+
 import config from 'config';
 
 const Wrapper = styled.article`
@@ -22,6 +24,19 @@ const Wrapper = styled.article`
   :hover {
     cursor: pointer;
     border: 1px solid ${palette.gray5};
+  }
+
+  @media screen and (max-width: ${responsiveSize.desktop.lg}) {
+    width: 30%;
+  }
+
+  @media screen and (max-width: ${responsiveSize.desktop.md}) {
+    width: 46%;
+  }
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    width: 97%;
+    margin: 0.625rem 0 1.25rem;
   }
 `;
 
@@ -43,6 +58,9 @@ const Company = styled.h1`
   :hover {
     color: ${palette.blue9};
   }
+  /* @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 1.25rem;
+  } */
 `;
 
 const Location = styled.span`
@@ -55,6 +73,10 @@ const Location = styled.span`
   padding: 0 0.625rem;
   box-sizing: border-box;
   min-height: 1.125rem;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 0.625rem;
+  }
 `;
 
 const PossibleContent = styled.span`
@@ -95,7 +117,8 @@ const JobCard: React.FC<JobCardProps> = ({
       <Location>
         {location && (
           <>
-            <i className="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{location}
+            <i className="fas fa-map-marker-alt"></i>
+            {location}
           </>
         )}
       </Location>

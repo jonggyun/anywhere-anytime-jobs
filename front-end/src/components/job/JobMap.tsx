@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { UnderLine } from 'styles/common';
+import { UnderLine, responsiveSize } from 'styles/common';
 import palette from 'styles/palette';
 
 declare const kakao: any;
@@ -15,6 +15,10 @@ const MapWrapper = styled.div`
   /* ::after {
     content: '위치 정보가 없습니다.';
   } */
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h2`

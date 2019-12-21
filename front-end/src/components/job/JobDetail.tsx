@@ -12,9 +12,14 @@ import JobMap from 'components/job/JobMap';
 import { RuleType, NewsType } from 'store/job/types';
 
 import config from 'config';
+import { responsiveSize } from 'styles/common';
 
 const Wrapper = styled.section`
   width: inherit;
+
+  @media screen and (max-width: ${responsiveSize.desktop.lg}) {
+    width: 100%;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -36,17 +41,29 @@ const Name = styled.h1`
   font-weight: 700;
   padding: 0;
   margin: 0 0 0.625rem 0;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 1.625rem;
+  }
 `;
 
 const Info = styled.div`
   display: flex;
   margin-bottom: 0.5rem;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    flex-direction: column;
+  }
 `;
 
 const InfoText = styled.span`
   font-size: 0.75rem;
   color: ${palette.gray5};
   margin-right: 1.5rem;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 0.625rem;
+  }
 `;
 
 const Homepage = styled(InfoText)`
@@ -58,6 +75,10 @@ const Homepage = styled(InfoText)`
 
 const ContentWrapper = styled.div`
   display: flex;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    flex-direction: column;
+  }
 `;
 
 const MainInfo = styled.article`
@@ -68,6 +89,15 @@ const SideInfo = styled.article`
   width: 18.75rem;
   margin-left: 1rem;
   overflow: hidden;
+
+  @media screen and (max-width: ${responsiveSize.desktop.md}) {
+    width: 15.625rem;
+  }
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    margin: 0;
+    width: 100%;
+  }
 `;
 
 interface JobDetailProps {

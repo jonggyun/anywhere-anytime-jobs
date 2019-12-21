@@ -7,7 +7,7 @@ import { JobType } from 'store/job/types';
 import MenuButton from 'components/common/MenuButton';
 import JobCardContainer from 'containers/job/JobCardConatiner';
 
-import common from 'styles/common';
+import common, { responsiveSize } from 'styles/common';
 
 import MainImage from 'assets/main.jpg';
 
@@ -34,18 +34,31 @@ const Image = styled.img`
 const ContentsWrapper = styled.div`
   width: 68.75rem;
   padding: 2rem 0.5rem;
-  /* box-sizing: border-box; */
+
+  @media screen and (max-width: ${responsiveSize.desktop.lg}) {
+    width: 95%;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    width: 95%;
+  }
 `;
 
 const JobCardsWrapper = styled.section`
   display: flex;
   flex-wrap: wrap;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    flex-wrap: none;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 interface JobCardsProps {

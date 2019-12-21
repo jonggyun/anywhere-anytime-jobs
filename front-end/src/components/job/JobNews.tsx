@@ -4,7 +4,7 @@ import format from 'date-fns/format';
 
 import { NewsType } from 'store/job/types';
 
-import { UnderLine } from 'styles/common';
+import { UnderLine, responsiveSize } from 'styles/common';
 import palette from 'styles/palette';
 
 import { htmlConvertToString } from 'lib/regex';
@@ -39,12 +39,20 @@ const NewsTitle = styled.span`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 0.75rem;
+  }
 `;
 
 const NewsDate = styled.span`
   display: inline-block;
   font-size: 0.75rem;
   color: ${palette.gray5};
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    font-size: 10px;
+  }
 `;
 
 interface JobNewsProps {

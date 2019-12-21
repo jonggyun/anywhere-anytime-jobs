@@ -4,8 +4,14 @@ import styled, { css } from 'styled-components';
 import Button from 'components/common/Button';
 import TextAreaBox from 'components/common/TextAreaBox';
 
+import { responsiveSize } from 'styles/common';
+
 const Wrapper = styled.section`
   width: 50%;
+
+  @media screen and (max-width: ${responsiveSize.desktop.sm}) {
+    width: 100%;
+  }
 `;
 
 const Item = styled.div`
