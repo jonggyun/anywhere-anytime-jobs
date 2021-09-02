@@ -21,7 +21,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "date-fns": "^2.6.0",
     "history": "^4.10.1",
-    "immer": "^4.0.0",
+    "immer": "^9.0.6",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-markdown": "^4.2.2",
